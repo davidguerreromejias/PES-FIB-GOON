@@ -39,9 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/event/home");
 })
 
-
-
-app.controller('MapController', function($scope, $ionicLoading) {
+app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDelegate, $window) {
     google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng);
     });
@@ -51,19 +49,18 @@ app.controller('MapController', function($scope, $ionicLoading) {
     var directionsService = new google.maps.DirectionsService();
     onDeviceReady();
 
-      $scope.toggleLeft = function() {
-        $ionicSideMenuDelegate.toggleLeft();
-      };
-
-      $scope.changeMode = function() {
-        console.log("hola");
-        $window.location.assign('blind.html');    
-      }
-
     function initRuta(map) {
         directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map);
     }
+
+    $scope.toggleLeft = function(){
+        $ionicSideMenuDelegate.toggleLeft();
+    };
+
+    $scope.changeMode = function(){
+        $window.location.assign('blind.html');  
+    };
 
     function placeMarker(location) {
         var marker = new google.maps.Marker({
