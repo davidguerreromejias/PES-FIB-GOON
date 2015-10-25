@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+ 
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+ 
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+ 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>    
+    <script src="cordova.js"></script>
+ 
+    <!-- your app's js -->
+    <script src="js/contrLogin.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller="CtrlLogin">
+ 
+  <ion-pane>
+          <div id="divLogin">
+              <div id="divLogin2"  class="gradient"> 
+                <div id="nom"><h1>GoOn!</h1></div>
+
+                <button id="buttonCompte" class="button button-clear button-dark" ng-click="goToSignUp()";>
+                  <a>Crear Compte</a>
+                </button>
+              </div>              
+              <div id="central">
+                   <div id ="inputs" class="list">
+                      <label style="border: 1px solid black;" class="item item-input">
+                        <input name ="username" type="text" placeholder="Username">
+                      </label>
+                      <label style="border: 1px solid black;" class="item item-input">
+                        <input name ="password" type="password" placeholder="Password">
+                      </label>
+                      <li  id ="disc" class="item item-toggle">
+                         Discapacitat visual
+                         <label class="toggle toggle-balanced">
+                           <input type="checkbox" id="check">
+                           <div class="track">
+                             <div class="handle"></div>
+                           </div>
+                         </label>
+                    </li>
+                        <button id="button" class="button button-balanced" ng-click="changeHTML()";>
+                          LOGIN
+                        </button>
+                   </div> 
+              </div>              
+          </div>
+    </ion-pane>
+  </body>
+</html>
+

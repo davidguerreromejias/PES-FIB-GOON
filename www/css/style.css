@@ -1,0 +1,228 @@
+/* Empty. Add your own CSS if you like */
+#map{
+	height: 100%;
+	width: 100%;
+}
+
+.scroll{
+	height: 100%;
+}
+
+#divLogin {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#divLogin2 {
+	height: 45%;
+	width: 100%;
+	position: absolute;
+	border-bottom: solid;
+}
+
+h1 {
+	font-size: 700%;
+}
+
+h2 {
+	font-size: 200%;
+	color: white;
+}
+
+#nom {
+	position: absolute;
+	font-family: sans-serif;
+	font-style: italic;
+	text-align:center;
+	top: 15%;
+	height: 60%;
+	width: 100%;
+}
+
+#buttonCompte {
+	position: absolute;
+	width: 80%;
+	left: 10%;
+	top:80%;
+	text-align: center;
+}
+
+#inputs {
+	position:absolute;
+	width: 100%;
+	top: 0%;
+}
+
+#appearSearchBox{
+	position:absolute;
+	right:3%;
+	top:3%;
+	z-index:1;
+	background-color:rgba(0,0,255,0.4);
+	color:rgba(255,255,255,1);
+}
+
+#disc {
+	position: absolute;
+	width: 100%;
+	left: 0%;
+	top:110%;
+}
+
+a {
+	text-decoration: none;
+	background-color: none;
+	color:white;
+}
+
+#central {
+	position: relative;
+	width: 60%;
+	height: 55%;
+	top: 48%;
+	left: 20%;
+}
+
+
+#button {
+	position:absolute;
+	top: 170%;
+	left: 30%;
+	width: 40%;
+	text-align: center;
+	border-radius: 15px;
+}
+
+#signup {
+	position:absolute;
+	top: 150%;
+	left: 30%;
+	width: 40%;
+	text-align: center;
+	border-radius: 15px;
+}
+
+.gradient {
+  background: -webkit-linear-gradient(white, #99CC66); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(white, #99CC66); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(white, #99CC66); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(white, #669900); /* Standard syntax */
+}
+
+#divBlind {
+	width: 100%;
+	height: 100%;
+	background-color: black;
+}
+
+#route-panel {
+	padding:15px 10px;
+	background-color: rgba(0,0,255,0.3);
+	width: 90%;
+	height: auto;
+	z-index: 0;
+	position: absolute;
+	right: 20px;
+	top: 25%;
+	border-radius:5px;
+	text-align:center;
+}
+.item-input{
+	margin-bottom:15px;
+	border-radius:3px;
+}
+.button.button-positive{
+	border-radius:3px;
+}
+
+#menu {
+	background-color: #4285F4;
+	width: 50%;
+	height: 50%;
+	display : none;
+	z-index: 0;
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	border-radius:5px;
+}
+
+#route-panel input{
+	box-shadow:none;
+
+}
+
+
+#pac-input-origin {
+	background-color: #fff;
+	padding: 0 11px 0 13px;
+	width: 91%;
+	height: 30%;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	text-overflow: ellipsis;
+}
+
+#pac-input-destination {
+	background-color: #fff;
+	padding: 0 11px 0 13px;
+	width: 91%;
+	height: 30%;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 420px) {
+   .pac-container {
+		z-index: 10 !important;
+		width: auto !important;
+		position: absolute !important;
+		left: 10% !important;
+		right: 10% !important;
+		top:15%;
+		display: block;
+	}
+	.pac-container:empty{
+		display: none !important;	
+	}
+	.gmnoprint{
+		bottom:0 !important;
+		top:auto !important;
+	}
+}
+
+#pac-input-destination:focus {
+	border-color: #4d90fe;
+	margin-left: -1px;
+	padding-left: 14px;  /* Regular padding-left + 1. */
+	width: 401px;
+}
+
+#pac-input-origin:focus {
+	border-color: #4d90fe;
+	margin-left: -1px;
+	padding-left: 14px;  /* Regular padding-left + 1. */
+	width: 401px;
+}
+
+.controls {
+	margin-top: 16px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
