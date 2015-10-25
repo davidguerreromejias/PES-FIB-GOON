@@ -20,6 +20,25 @@ app.run(function($ionicPlatform) {
   });
 })
 
+app.config(function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('eventmenu', {
+      url: "/event",
+      abstract: true,
+      templateUrl: "templates/event-menu.html"
+    })
+    .state('eventmenu.home', {
+      url: "/home",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/home.html"
+        }
+      }
+    })  
+  $urlRouterProvider.otherwise("/event/home");
+})
+
 
 
 app.controller('MapController', function($scope, $ionicLoading) {
@@ -37,6 +56,7 @@ app.controller('MapController', function($scope, $ionicLoading) {
       };
 
       $scope.changeMode = function() {
+        console.log("hola");
         $window.location.assign('blind.html');    
       }
 
