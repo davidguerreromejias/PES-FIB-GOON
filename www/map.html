@@ -29,45 +29,38 @@
           <ion-nav-buttons side="left">
             <button id="menulateral" class="button icon ion-navicon button-positive"  menu-toggle="left"></button>
           </ion-nav-buttons>
-          <ion-nav-buttons side="right" >
-              <!--<button ng-app="starter" id="appearSearchBox" class="button icon ion-map  button-positive" ng-click="initSearchBox();" ></button> -->
-          </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent">
-
-         <script id="templates/event-menu.html" type="text/ng-template"></script>  
-         <script id="templates/home.html" type="text/ng-template"></script>
- 
-      
-            <ion-header-bar class="bar-positive">
-                <h1 class="title" style="text-align: center">Mapa</h1>
-            </ion-header-bar>
-            <ion-content ng-controller="MapController">
-                <button id="appearSearchBox" class="button icon ion-map  button-positive" ng-click="askRouteTap()"></button>
-                <div id="map" data-tap-disabled="true"></div>
-                <div id="panel"></div>
-                <div id="route-panel" ng-show="visible == 1">
-                  <label class="item item-input">
-                    <i class="icon ion-search placeholder-icon"></i>
-                    <input id="pac-input-origin" class="controls" type="text" placeholder="Origin" autocomplete="off" ng-focus="disableOriginTap()">
-                  </label>
-                  <label class="item item-input">
-                    <i class="icon ion-search placeholder-icon"></i>
-                    <input id="pac-input-destination" class="controls" type="text" placeholder="Destination" autocomplete="off"  ng-focus="disableDestinationTap()"/>
-                  </label>
-                  <button id="create_route" class="button icon-right ion-ios-navigate button-positive" ng-click="getRouteTap()">Go!</button>
-                </div>
-            
-     
-        <script src="https://maps-api-ssl.google.com/maps/api/js?libraries=places"></script>
-     </ion-nav-view>
+          <script id="templates/event-menu.html" type="text/ng-template"></script>  
+          <script id="templates/home.html" type="text/ng-template"></script>
+          <ion-header-bar class="bar-positive">
+            <h1 class="title" style="text-align: center">Mapa</h1>
+          </ion-header-bar>
+          <ion-content ng-controller="MapController">
+            <button id="appearSearchBox" class="button icon ion-map  button-positive" ng-click="askRouteTap()"></button>
+            <div id="map" data-tap-disabled="true"></div>
+            <div id="panel"></div>
+            <div id="route-panel" ng-show="visible == 1">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input id="pac-input-origin" class="controls" type="text" placeholder="Origin" autocomplete="off" ng-focus="disableOriginTap()">
+              </label>
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input id="pac-input-destination" class="controls" type="text" placeholder="Destination" autocomplete="off"  ng-focus="disableDestinationTap()"/>
+              </label>
+              <button id="create_route" class="button icon-right ion-ios-navigate button-positive" ng-click="getRouteTap()">Go!</button>
+            </div>    
+            <script src="https://maps-api-ssl.google.com/maps/api/js?libraries=places"></script>
+          </ion-content>
+        </ion-nav-view>
       </ion-side-menu-content>
 
       <ion-side-menu side="left" >
         <ion-header-bar class="bar-stable">
           <h1 class="title" style="text-align: center" >Menu</h1>
         </ion-header-bar>
-        <ion-content>
+        <ion-content ng-controller="MapController">
           <ion-list>
             <ion-item menu-close href="#/event/check-in">
               Semàfors
@@ -91,6 +84,5 @@
         </ion-content>
       </ion-side-menu-content>
     </ion-side-menus>
-    </ion-content>
   </body>
 </html>
