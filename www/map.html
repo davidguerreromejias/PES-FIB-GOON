@@ -19,7 +19,7 @@
     <!-- your app's js -->
     <script src="js/map.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter"  ng-controller="MapController">
 
     <ion-side-menus>
       <ion-side-menu-content>
@@ -36,7 +36,7 @@
           <ion-header-bar class="bar-positive">
             <h1 class="title" style="text-align: center">Mapa</h1>
           </ion-header-bar>
-          <ion-content ng-controller="MapController">
+          <ion-content>
             <button id="appearSearchBox" class="button icon ion-map  button-positive" ng-click="askRouteTap()"></button>
             <div id="map" data-tap-disabled="true"></div>
             <div id="panel"></div>
@@ -60,7 +60,7 @@
         <ion-header-bar class="bar-stable">
           <h1 class="title" style="text-align: center" >Menu</h1>
         </ion-header-bar>
-        <ion-content ng-controller="MapController">
+        <ion-content>
           <ion-list>
             <ion-item menu-close href="#/event/check-in">
               Semàfors
