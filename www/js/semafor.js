@@ -1,46 +1,74 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-var contrSemafor = angular.module('starter', ['ionic'])
-
-
-contrBlind.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
+// Range beacons screen.
+;(function(app)
+{
+  app.startRangingBeacons = function()
+  {
+    function onRange(beaconInfo)
+    {
+      displayBeconInfo(beaconInfo);
     }
 
-  });
-})
+    function onError(errorMessage)
+    {
+      console.log('Range error: ' + errorMessage);
+    }
 
-contrSemafor.controller('CtrlSemafor', function($scope, $window) {
+    function displayBeconInfo(beaconInfo)
+    {
+      // Clear beacon HTML items.
+      $('#id-screen-range-beacons .style-item-list').empty();
 
-  var timer = 0, timerInterval, div = document.getElementById("divBlind");
+      // Sort beacons by distance.
+      beaconInfo.beacons.sort(function(beacon1, beacon2) {
+        return beacon1.distance > beacon2.distance; });
 
-  div.addEventListener("mousedown", function() {
-    timerInterval = setInterval(function(){ 
-      timer += 1;  
-      if (timer > 2) change();
-    }, 1000);
-  });
+      // Generate HTML for beacons.
+      $.each(beaconInfo.beacons, function(key, beacon)
+      {
+        var element = $(createBeaconHTML(beacon));
+        $('#id-screen-range-beacons .style-item-list').append(element);
+      });
+    };
 
-  div.addEventListener("mouseup", function() {
-    clearInterval(timerInterval);
-    timer = 0;
-  });
+    function createBeaconHTML(beacon)
+    {
+      var colorClasses = app.beaconColorStyle(beacon.color);
+      var htm = '<div class="' + colorClasses + '">'
+        + '<table><tr><td>Major</td><td>' + beacon.major
+        + '</td></tr><tr><td>Minor</td><td>' + beacon.minor
+        + '</td></tr><tr><td>RSSI</td><td>' + beacon.rssi
+      if (beacon.proximity)
+      {
+        htm += '</td></tr><tr><td>Proximity</td><td>'
+          + app.formatProximity(beacon.proximity)
+      }
+      if (beacon.distance)
+      {
+        htm += '</td></tr><tr><td>Distance</td><td>'
+          + app.formatDistance(beacon.distance)
+      }
+      htm += '</td></tr></table></div>';
+      return htm;
+    };
 
-  function change() {
-    $window.location.assign('map.html');
-    navigator.vibrate(5000);
-  }
+    // Show screen.
+    app.showScreen('id-screen-range-beacons');
+    $('#id-screen-range-beacons .style-item-list').empty();
 
+    // Request authorisation.
+    estimote.beacons.requestAlwaysAuthorization();
 
-});
+    // Start ranging.
+    estimote.beacons.startRangingBeaconsInRegion(
+      {}, // Empty region matches all beacons.
+      onRange,
+      onError);
+  };
+
+  app.stopRangingBeacons = function()
+  {
+    estimote.beacons.stopRangingBeaconsInRegion({});
+    app.showHomeScreen();
+  };
+
+})(app);
