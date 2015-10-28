@@ -40,10 +40,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
 
 app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDelegate, $window) {
-    google.maps.event.addListener(map, 'click', function(event) {
-        placeMarker(event.latLng);
-    });
-
+    console.log("hola");
     $scope.visible = 0;
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
