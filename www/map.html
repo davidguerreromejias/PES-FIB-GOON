@@ -41,6 +41,7 @@
             <div id="map" data-tap-disabled="true"></div>
             <div id="panel"></div>
             <div id="route-panel" ng-show="visible == 1">
+			  <button id="use-my-position" class="button icon ion-ios-location  button-positive" ng-click="useMyPosition()"></button>
               <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
                 <input id="pac-input-origin" class="controls" type="text" placeholder="Origin" autocomplete="off" ng-focus="disableOriginTap()">
