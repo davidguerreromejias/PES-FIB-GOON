@@ -59,6 +59,10 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
         $window.location.assign('blind.html');  
     };
 
+    $scope.semafors = function(){
+        $window.location.assign('semafors.html');  
+    };
+
     function placeMarker(location) {
         var marker = new google.maps.Marker({
             position: location, 
