@@ -40,7 +40,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
 
 app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDelegate, $window) {
-    console.log("hola");
+    //console.log("hola");
     $scope.visible = 0;
     var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
@@ -98,6 +98,11 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
               
         $scope.map = map;   
         $ionicLoading.hide();
+		
+		$scope.useMyPosition = function() {
+			originCoord = myLatlng;
+            document.getElementById("pac-input-origin").value = "My position";
+		};
         
         }
         function onError(error){
@@ -140,6 +145,7 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
           }
         });
     };
+	
 
     $scope.getRouteTap =  function() {
         if(originCoord != null && destinationCoord != null) {
