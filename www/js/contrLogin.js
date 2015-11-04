@@ -21,17 +21,26 @@ contrLogin.run(function($ionicPlatform) {
   });
 })
 
-contrLogin.controller('CtrlLogin', function($scope, $window) {
+contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
   
   $scope.login = function() {
-	  var username = document.getElementById('username');
-	  var passwd = document.getElementById('password');
+	  var username = document.getElementById();
+	  var passwd = $scope.password;
 	  //client input filter??
-	  
+	  var url = "https://goonpes.herokuapp.com/login?email=" + username + "&password=" + passwd;
 	  //http petition
+	  $http.get(url)
+        .success(function (response) {
+			if(response['msg']=="Success"){
+				if (document.getElementById('check').checked) $window.location.assign('blind.html');
+				else $window.location.assign('map.html');
+			//$scope.names = response;
+			//console.log($scope.names);});
+			}
+      });
+	
+
 	  
-	  if (document.getElementById('check').checked) $window.location.assign('blind.html');
-	  else $window.location.assign('map.html');
   }
 
   $scope.goToSignUp = function() {
