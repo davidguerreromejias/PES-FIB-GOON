@@ -21,12 +21,13 @@ contrLogin.run(function($ionicPlatform) {
   });
 })
 
-contrLogin.controller('CtrlLogin', function($scope, $window) {
+contrLogin.controller('CtrlSignUp', function($scope, $window) {
   
   $scope.login = function() {
 	  var username = document.getElementById('username');
 	  var passwd = document.getElementById('password');
-	  //client input filter??
+	  var email = document.getElementById('email');
+	  //client input filter
 	  
 	  //http petition
 	  
@@ -34,8 +35,8 @@ contrLogin.controller('CtrlLogin', function($scope, $window) {
 	  else $window.location.assign('map.html');
   }
 
-  $scope.goToSignUp = function() {
-    $window.location.assign('signup.html');    
+  $scope.goToLogin = function() {
+    $window.location.assign('index.html');    
   }
 
 });

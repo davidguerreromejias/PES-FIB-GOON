@@ -19,17 +19,17 @@
     <script src="cordova.js"></script>
  
     <!-- your app's js -->
-    <script src="js/contrLogin.js"></script>
+    <script src="js/contrSignup.js"></script>
   </head>
-  <body ng-app="starter" ng-controller="CtrlLogin">
+  <body ng-app="starter" ng-controller="CtrlSignUp">
  
   <ion-pane>
           <div id="divLogin">
               <div id="divLogin2"  class="gradient"> 
                 <div id="nom"><h1>GoOn!</h1></div>
 
-                <button id="buttonCompte" class="button button-clear button-dark" ng-click="goToSignUp()";>
-                  <a>Crear Compte</a>
+                <button id="buttonCompte" class="button button-clear button-dark" ng-click="goToLogin()";>
+                  <a>Iniciar sessió</a>
                 </button>
               </div>              
               <div id="central">
@@ -40,17 +40,12 @@
                       <label style="border: 1px solid black;" class="item item-input">
                         <input name ="password" type="password" placeholder="Password">
                       </label>
-                      <li  id ="disc" class="item item-toggle">
-                         Discapacitat visual
-                         <label class="toggle toggle-balanced">
-                           <input type="checkbox" id="check">
-                           <div class="track">
-                             <div class="handle"></div>
-                           </div>
-                         </label>
-                    </li>
-                        <button id="button" class="button button-balanced" ng-click="login()";>
-                          LOGIN
+					  <label style="border: 1px solid black;" class="item item-input">
+                        <input name ="email" type="text" placeholder="Email">
+                      </label>
+                      
+                        <button id="button" class="button button-balanced" ng-click="sign()";>
+                          SIGN UP
                         </button>
                    </div> 
               </div>              
