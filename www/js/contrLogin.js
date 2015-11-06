@@ -24,6 +24,8 @@ contrLogin.run(function($ionicPlatform) {
 contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
   
   $scope.login = function() {
+
+    /**
 	  var username = document.getElementById();
 	  var passwd = $scope.password;
 	  //client input filter??
@@ -38,6 +40,8 @@ contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
 			//console.log($scope.names);});
 			}
       });
+*/
+      $window.location.assign('map.html'); 
 	
 
 	  
