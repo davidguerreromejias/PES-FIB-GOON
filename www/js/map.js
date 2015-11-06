@@ -77,128 +77,205 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
             a = position.coords.latitude;
             b = position.coords.longitude;
             $ionicLoading.show({
-            template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
-        });
+                template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
+            });
          
-        var posOptions = {
-            enableHighAccuracy: true,
-            timeout: 20000,
-            maximumAge: 0
-        };
-        var myLatlng = new google.maps.LatLng(a,b);
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };          
+            var posOptions = {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 0
+            };
+
+            var myLatlng = new google.maps.LatLng(a,b);
+            var mapOptions = {
+                center: myLatlng,
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };          
              
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);          
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: "soc aqui"
-        })   
-        initRuta(map);
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);          
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: "soc aqui"
+            })   
+            
+            initRuta(map);
               
-        $scope.map = map;   
-        $ionicLoading.hide();
+            $scope.map = map;   
+            $ionicLoading.hide();
 		
-		$scope.useMyPosition = function() {
-			originCoord = myLatlng;
-            document.getElementById("pac-input-origin").value = "My position";
-		};
-        
+        		$scope.useMyPosition = function() {
+        		    originCoord = myLatlng;
+                document.getElementById("pac-input-origin").value = "My position";
+        		};
+/**
+            var origin_marker;
+            var destination_marker; **/
+            var marker;
+            var count = 1;
+            var origcoord;
+            var desticoord;
+
+            //Place a new marker
+            google.maps.event.addListener($scope.map, 'click', function(event) {
+                if(marker != null) {
+                      marker.setMap(null);
+                }
+    
+                if(count == 2) {
+                    document.getElementById("marker-menu").style.display = 'none';
+                    count = 0;
+                }
+                else {
+                    if(document.getElementById("marker-menu").offsetLeft > 0)
+                        document.getElementById("marker-menu").style.display = 'none';
+                    else
+                        document.getElementById("marker-menu").style.display = 'block';
+
+                    var tapLocation = event.latLng;
+                    marker = new google.maps.Marker({
+                        position: tapLocation,
+                        map: map,
+                        title: "marker placed"
+                    })
+
+                    $scope.barrierON = function () {
+                        alert("BARRIER!");
+                        document.getElementById("marker-menu").style.display = 'none';
+                        count = 0;
+                        origcoord = null;
+                        desticoord = null;
+                        marker.setMap(null);
+                    }
+
+                    $scope.originON = function () {
+                        origcoord = event.latLng;
+                        document.getElementById("marker-menu").style.display = 'none';
+                        document.getElementById("origin-marker").style.display = 'none';
+                        if(desticoord != null) {
+                          document.getElementById("origin-marker").style.display = 'block';
+                          document.getElementById("destination-marker").style.display = 'block';
+                          calcRoute(origcoord, desticoord);
+                          count = 0;
+                          origcoord = null;
+                          desticoord = null;
+                          marker.setMap(null);
+                        }
+                    }
+
+                    $scope.destinationON = function () {
+                        desticoord = event.latLng;
+                        document.getElementById("marker-menu").style.display = 'none';
+                        document.getElementById("destination-marker").style.display = 'none';
+                        if(origcoord != null) {
+                          document.getElementById("origin-marker").style.display = 'block';
+                          document.getElementById("destination-marker").style.display = 'block';
+                          calcRoute(origcoord, desticoord);
+                          count = 0;
+                          origcoord = null;
+                          desticoord = null;
+                          marker.setMap(null);
+                        }
+                    }
+
+                    $scope.restartON = function () {
+                        document.getElementById("marker-menu").style.display = 'none';
+                        document.getElementById("origin-marker").style.display = 'block';
+                        document.getElementById("destination-marker").style.display = 'block';
+                        count = 0;
+                        origcoord = null;
+                        desticoord = null;
+                        marker.setMap(null);
+                    }
+                }
+                ++count;
+            });
         }
+
         function onError(error){
             alert('code: ' + error.code);
         }
 
-      $scope.askRouteTap = function(){
-       
-        //Make visible or invisible the search boxes
-        if ($scope.visible == 0) $scope.visible = 1;
-        else $scope.visible = 0;
-       
+        $scope.askRouteTap = function(){
+            //Make visible or invisible the search boxes
+            if ($scope.visible == 0) $scope.visible = 1;
+            else $scope.visible = 0;
 
+            // Create the search box and link it to the UI element.
+            document.getElementById("pac-input-origin").value = "";
+            var origin = document.getElementById("pac-input-origin");
+            var originAutocomplete = new google.maps.places.Autocomplete(origin);
 
-        // Create the search box and link it to the UI element.
-       document.getElementById("pac-input-origin").value = "";
-        var origin = document.getElementById("pac-input-origin");
-        var originAutocomplete = new google.maps.places.Autocomplete(origin);
+            // Create the search box and link it to the UI element.
+            document.getElementById("pac-input-destination").value = "";
+            var destination = document.getElementById("pac-input-destination");
+            var destinationAutocomplete = new google.maps.places.Autocomplete(destination);
 
-        // Create the search box and link it to the UI element.
-        document.getElementById("pac-input-destination").value = "";
-        var destination = document.getElementById("pac-input-destination");
-        var destinationAutocomplete = new google.maps.places.Autocomplete(destination);
+            google.maps.event.addListener(originAutocomplete, 'place_changed', function() {
+                var place = originAutocomplete.getPlace();
+                if(place.geometry) {
+                    originCoord = place.geometry.location;
+                    originAutocomplete = null;
+                }
+            });
 
-        
-
-        google.maps.event.addListener(originAutocomplete, 'place_changed', function() {
-          var place = originAutocomplete.getPlace();
-          if(place.geometry) {
-            originCoord = place.geometry.location;
-            originAutocomplete = null;
-          }
-        });
-
-        google.maps.event.addListener(destinationAutocomplete, 'place_changed', function() {
-          var place = destinationAutocomplete.getPlace();
-          if(place.geometry) {
-            destinationCoord = place.geometry.location;
-            destinationAutcomplete = null;
-          }
-        });
-    };
-	
-
-    $scope.getRouteTap =  function() {
-        if(originCoord != null && destinationCoord != null) {
-          $scope.visible = 0;
-          calcRoute(originCoord, destinationCoord);
-        }
-        else if(originCoord != null) {
-          alert("Please, insert DESTINATION.");
-        }
-        else if(destinationCoord != null) {
-          alert("Please, insert ORIGIN.");
-        }
-      };
-
-
-    $scope.disableOriginTap = function() {
-      var container;
-      container = document.getElementsByClassName('pac-container');
-      angular.element(container).attr('data-tap-disabled', 'true');
-      angular.element(container).css('display', 'none !important');
-      angular.element(container).on('click', function() {
-        document.getElementById('pac-input-origin').blur();
-      });
-    };
-
-    $scope.disableDestinationTap = function() {
-      var container;
-      container = document.getElementsByClassName('pac-container');
-      angular.element(container).css('display', 'none !important');
-      angular.element(container).attr('data-tap-disabled', 'true');
-      angular.element(container).on('click', function() {
-        document.getElementById('pac-input-destination').blur();
-      });
-    };
-
-    function calcRoute(start, end) {
-        var request = {
-            origin:start,
-            destination:end,
-            travelMode: google.maps.TravelMode.TRANSIT //TRANSIT per transport public, WALKING per ruta a peu
+            google.maps.event.addListener(destinationAutocomplete, 'place_changed', function() {
+                var place = destinationAutocomplete.getPlace();
+                if(place.geometry) {
+                    destinationCoord = place.geometry.location;
+                    destinationAutcomplete = null;
+                }
+            });
         };
-        directionsService.route(request, function(result, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(result);
+	
+        $scope.getRouteTap =  function() {
+            if(originCoord != null && destinationCoord != null) {
+                $scope.visible = 0;
+                calcRoute(originCoord, destinationCoord);
             }
-        });
-   }
+            else if(originCoord != null) {
+                alert("Please, insert DESTINATION.");
+            }
+            else if(destinationCoord != null) {
+                alert("Please, insert ORIGIN.");
+            }
+        };
 
-   navigator.geolocation.getCurrentPosition(onSuccess,onError)
+        $scope.disableOriginTap = function() {
+            var container;
+            container = document.getElementsByClassName('pac-container');
+            angular.element(container).attr('data-tap-disabled', 'true');
+            angular.element(container).css('display', 'none !important');
+            angular.element(container).on('click', function() {
+                document.getElementById('pac-input-origin').blur();
+            });
+        };
 
-}                            
+        $scope.disableDestinationTap = function() {
+            var container;
+            container = document.getElementsByClassName('pac-container');
+            angular.element(container).css('display', 'none !important');
+            angular.element(container).attr('data-tap-disabled', 'true');
+            angular.element(container).on('click', function() {
+                document.getElementById('pac-input-destination').blur();
+            });
+        };
+
+        function calcRoute(start, end) {
+
+            var request = {
+                origin:start,
+                destination:end,
+                travelMode: google.maps.TravelMode.TRANSIT //TRANSIT per transport public, WALKING per ruta a peu
+            };
+
+            directionsService.route(request, function(result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                }
+            });
+        }
+        navigator.geolocation.getCurrentPosition(onSuccess,onError)
+    }                            
 });
