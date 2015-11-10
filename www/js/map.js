@@ -70,6 +70,17 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
         });
     }
 
+    function playAudio(audioElm) {
+         // Get file from text box and assign it to the source of the audio element 
+        audioElm.src = document.getElementById('audioFile').value;
+        audioElm.play();
+    }
+
+    function pauseAudio(audioElm) {
+        audioElm.src = document.getElementById('audioFile').value;
+        audioElm.pause();
+    }
+
     function onDeviceReady() {
         var a;
         var b;
@@ -241,6 +252,33 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
                 alert("Please, insert ORIGIN.");
             }
         };
+
+        $scope.audioPrueba = function() {
+            $window.location.assign('audio.html');  
+        };
+
+
+        var audioElm = document.getElementById("audio1"); // Audio element
+        var cont = 2;
+
+       //  Alternates between play and pause based on the value of the paused property
+        $scope.togglePlay = function() {
+            if (cont%2 == 0) {
+                if (document.getElementById("audio1")) {
+                    playAudio(audioElm); 
+                }
+                ++cont;
+            }
+            else {
+                if (document.getElementById("audio1")) {
+                    pauseAudio(audioElm); 
+                }
+                ++cont;
+            }
+        }
+
+       
+
 
         $scope.disableOriginTap = function() {
             var container;

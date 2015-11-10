@@ -48,6 +48,15 @@ h2 {
 	text-align: center;
 }
 
+#audio {
+	position: relative;
+	width: 100%;
+	left: 10%;
+	top:80%;
+	text-align: center;
+	background: yellow;
+}
+
 #inputs {
 	position:absolute;
 	width: 100%;
