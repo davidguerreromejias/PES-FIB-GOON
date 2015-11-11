@@ -126,8 +126,14 @@ a {
 	left: 20%;
 }
 
+#buttonsignup {
+	left: 30%;
+	width: 40%;
+	text-align: center;
+	border-radius: 15px;
+}
 
-#button {
+#buttonlogin {
 	position:absolute;
 	top: 170%;
 	left: 30%;

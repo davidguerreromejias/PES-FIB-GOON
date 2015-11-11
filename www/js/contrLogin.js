@@ -25,23 +25,28 @@ contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
   
   $scope.login = function() {
 
-    /**
-	  var username = document.getElementById();
-	  var passwd = $scope.password;
+	  var email = $('#email').val();
+	  var passwd = $('#password').val();
+	  alert(email);
+	  alert(passwd);
 	  //client input filter??
-	  var url = "https://goonpes.herokuapp.com/login?email=" + username + "&password=" + passwd;
+	  var url = "https://goonpes.herokuapp.com/login?email=" + email + "&password=" + passwd;
 	  //http petition
 	  $http.get(url)
         .success(function (response) {
+			console.log(response);
 			if(response['msg']=="Success"){
-				if (document.getElementById('check').checked) $window.location.assign('blind.html');
-				else $window.location.assign('map.html');
+				console.log(response);
+				//if (document.getElementById('check').checked) $window.location.assign('blind.html');
+				//else $window.location.assign('map.html');
 			//$scope.names = response;
 			//console.log($scope.names);});
 			}
+			else{
+				//alert("Error en les credencials");
+			}
       });
-*/
-      $window.location.assign('map.html'); 
+      //$window.location.assign('map.html'); 
 	
 
 	  

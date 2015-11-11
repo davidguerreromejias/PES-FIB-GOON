@@ -21,18 +21,32 @@ contrLogin.run(function($ionicPlatform) {
   });
 })
 
-contrLogin.controller('CtrlSignUp', function($scope, $window) {
+contrLogin.controller('CtrlSignUp', function($scope, $http, $window) {
   
-  $scope.login = function() {
-	  var username = document.getElementById('username');
-	  var passwd = document.getElementById('password');
-	  var email = document.getElementById('email');
+  $scope.sign = function() {
+	  var username = $('#username').val();
+	  var passwd = $('#password').val;
+	  var email = $('#email').val();
 	  //client input filter
 	  
 	  //http petition
-	  
-	  if (document.getElementById('check').checked) $window.location.assign('blind.html');
-	  else $window.location.assign('map.html');
+	  var data =
+	  {
+		"email":email,
+		"passw":passwd,
+		"name":username
+	  }
+	  $http.post("https://goonpes.herokuapp.com/users",data)
+        .success(function (response) {
+			if(response['msg'] == "Success"){
+				console.log(response);
+			}
+			else{
+				("Error: Aquest email ja està registrat");
+			}
+		});
+	  //if (document.getElementById('check').checked) $window.location.assign('blind.html');
+	  //else $window.location.assign('map.html');
   }
 
   $scope.goToLogin = function() {
