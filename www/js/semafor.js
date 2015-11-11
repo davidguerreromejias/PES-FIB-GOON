@@ -36,7 +36,8 @@
       if(beacon.major == 23825 && beacon.minor == 61543) bus = 33;
       else if (beacon.major == 34430 && beacon.minor == 32267) bus = 7;
       var colorClasses = app.beaconColorStyle(beacon.color);
-      var htm = '<div class="' + colorClasses + '">'
+      var htm = '<label>'
+      /*var htm = '<div class="' + colorClasses + '">'
         + '<table><tr><td>Major</td><td>' + beacon.major
         + '</td></tr><tr><td>Minor</td><td>' + beacon.minor
         + '</td></tr><tr><td>RSSI</td><td>' + beacon.rssi
@@ -50,11 +51,12 @@
         htm += '</td></tr><tr><td>Distance</td><td>'
           + app.formatDistance(beacon.distance)
       }
-      htm += '</td></tr></table></div>';
+      htm += '</td></tr></table></div>';*/
       if (beacon.distance)
       {
-        document.getElementById("prova1").innerHTML = "El bus numero " + bus + " esta a " + app.formatDistance(beacon.distance) + " de distancia" ;
+        htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' 
       }
+      htm += '</label></br>';
       return htm;
     };
 
