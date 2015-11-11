@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, user-scalable=no,
       initial-scale=1, maximum-scale=1, minimum-scale=1" />
     <link rel="stylesheet" href="css/app.css" />
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
     <title>Semafors</title>
   </head>
   <body>
@@ -25,7 +30,9 @@
     </div>
 
     <div id="id-screen-range-beacons" class="style-screen">
-      <div class="style-heading-small style-color-purple">Autobusos pròxims</div>
+      <ion-header-bar class="bar-positive">
+        <h1 class="title" style="text-align: center">Autobusos pròxims</h1>
+      </ion-header-bar>
       <div class="style-item-list"></div>
     </div>
 
