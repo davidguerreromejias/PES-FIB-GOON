@@ -1,4 +1,3 @@
-src="lib/jquery-2.1.1.min.js";
 
 // Define application object and common functions.
 var app = (function()

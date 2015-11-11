@@ -32,6 +32,9 @@
 
     function createBeaconHTML(beacon)
     {
+      var bus = "no ha funcionat";
+      if(beacon.major == 23825 && beacon.minor == 61543) bus = 33;
+      else if (beacon.major == 34430 && beacon.minor == 32267) bus = 7;
       var colorClasses = app.beaconColorStyle(beacon.color);
       var htm = '<div class="' + colorClasses + '">'
         + '<table><tr><td>Major</td><td>' + beacon.major
@@ -48,6 +51,10 @@
           + app.formatDistance(beacon.distance)
       }
       htm += '</td></tr></table></div>';
+      if (beacon.distance)
+      {
+        document.getElementById("prova1").innerHTML = "El bus numero " + bus + " esta a " + app.formatDistance(beacon.distance) + " de distancia" ;
+      }
       return htm;
     };
 
