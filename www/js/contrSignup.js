@@ -25,7 +25,7 @@ contrLogin.controller('CtrlSignUp', function($scope, $http, $window) {
   
   $scope.sign = function() {
 	  var username = $('#username').val();
-	  var passwd = $('#password').val;
+	  var passwd = $('#password').val();
 	  var email = $('#email').val();
 	  //client input filter
 	  
@@ -36,18 +36,15 @@ contrLogin.controller('CtrlSignUp', function($scope, $http, $window) {
 		"passw":passwd,
 		"name":username
 	  }
-	  $http.post("https://goonpes.herokuapp.com/users",data)
+	  //onerror method 
+	  $http.post("https://goonpes.herokuapp.com/users",data){
         .success(function (response) {
 			if(response['msg'] == "Success"){
-				console.log(response);
-			}
-			else{
-				("Error: Aquest email ja està registrat");
+				//console.log(response);
+				alert("Registre completat amb èxit");
 			}
 		});
-	  //if (document.getElementById('check').checked) $window.location.assign('blind.html');
-	  //else $window.location.assign('map.html');
-  }
+	}
 
   $scope.goToLogin = function() {
     $window.location.assign('index.html');    

@@ -27,29 +27,19 @@ contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
 
 	  var email = $('#email').val();
 	  var passwd = $('#password').val();
-	  alert(email);
-	  alert(passwd);
 	  //client input filter??
 	  var url = "https://goonpes.herokuapp.com/login?email=" + email + "&password=" + passwd;
 	  //http petition
 	  $http.get(url)
         .success(function (response) {
-			console.log(response);
 			if(response['msg']=="Success"){
-				console.log(response);
-				//if (document.getElementById('check').checked) $window.location.assign('blind.html');
-				//else $window.location.assign('map.html');
-			//$scope.names = response;
-			//console.log($scope.names);});
+				if (document.getElementById('check').checked) $window.location.assign('blind.html');
+				else $window.location.assign('map.html');
 			}
 			else{
-				//alert("Error en les credencials");
+				alert("Error en les credencials");
 			}
       });
-      //$window.location.assign('map.html'); 
-	
-
-	  
   }
 
   $scope.goToSignUp = function() {
