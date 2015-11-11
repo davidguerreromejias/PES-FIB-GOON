@@ -23,6 +23,67 @@
   </head>
   <body ng-app="starter" ng-controller="CtrlLogin">
  
+  <ion-pane id="pane">             
+              <div id="central">
+                   <div id ="inputs" class="list">
+                      <label style="border: 1px solid black;" class="item item-input">
+                        <input name="email" id="email" type="text" placeholder="Email">
+                      </label>
+                      <label style="border: 1px solid black;" class="item item-input">
+                        <input name="password" id="password" type="password" placeholder="Password">
+                      </label>
+                    <li  id ="disc" class="item item-checkbox">
+                         Discapacitat visual
+                         <label class="checkbox">
+                           <input type="checkbox" id="check">
+                           <div class="track">
+                             <div class="handle"></div>
+                           </div>
+                         </label>
+                      </li>
+                      </div> 
+                      <button id="buttonlogin" ng-click="login()";>
+                        <b style="color:white">LOGIN</b>
+                      </button>
+              </div>  
+              <div id="buttonCompte"><button style="border:black; background-color: transparent;" ng-click="goToSignUp()";>
+                <a>Crear Compte</a>
+              </button></div>           
+    </ion-pane>
+  </body>
+</html>
+
+
+
+
+
+<!--
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+ 
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+ 
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+ 
+
+    <script src="js/ng-cordova.min.js"></script>   
+    <script src="lib/jquery-2.1.1.min.js"></script> 
+    <script src="cordova.js"></script>
+ 
+
+    <script src="js/contrLogin.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller="CtrlLogin">
+ 
   <ion-pane>
           <div id="divLogin">
               <div id="divLogin2"  class="gradient"> 
@@ -59,3 +120,4 @@
   </body>
 </html>
 
+-->
