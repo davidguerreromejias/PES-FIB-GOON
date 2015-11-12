@@ -39,7 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/event/home");
 })
 
-app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDelegate, $window) {
+app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSideMenuDelegate, $window) {
     //console.log("hola");
     $scope.visible = 0;
     var directionsDisplay;
@@ -120,87 +120,129 @@ app.controller('MapController', function($scope, $ionicLoading,$ionicSideMenuDel
         		    originCoord = myLatlng;
                 document.getElementById("pac-input-origin").value = "My position";
         		};
-/**
-            var origin_marker;
-            var destination_marker; **/
-            var marker;
-            var count = 1;
-            var origcoord;
-            var desticoord;
+
+            var origin_marker, 
+                destination_marker,
+                barrier_marker,
+                marker;
+
+            var origcoord,
+                desticoord;
 
             //Place a new marker
-            google.maps.event.addListener($scope.map, 'click', function(event) {
-                if(marker != null) {
-                      marker.setMap(null);
-                }
-    
-                if(count == 2) {
+            google.maps.event.addListener($scope.map, 'click', function(event) {  
+                if(document.getElementById("marker-menu").style.display == 'block')
                     document.getElementById("marker-menu").style.display = 'none';
-                    count = 0;
-                }
-                else {
-                    if(document.getElementById("marker-menu").offsetLeft > 0)
-                        document.getElementById("marker-menu").style.display = 'none';
-                    else
-                        document.getElementById("marker-menu").style.display = 'block';
+                else
+                    document.getElementById("marker-menu").style.display = 'block';
 
-                    var tapLocation = event.latLng;
-                    marker = new google.maps.Marker({
+                var tapLocation = event.latLng;
+
+                if(marker != null)      
+                    marker.setMap(null); 
+
+                marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed"
-                    })
+                })  
 
-                    $scope.barrierON = function () {
-                        alert("BARRIER!");
-                        document.getElementById("marker-menu").style.display = 'none';
-                        count = 0;
-                        origcoord = null;
-                        desticoord = null;
-                        marker.setMap(null);
-                    }
+                if(barrier_marker != null)
+                    barrier_marker.setMap(null);
 
-                    $scope.originON = function () {
-                        origcoord = event.latLng;
-                        document.getElementById("marker-menu").style.display = 'none';
-                        document.getElementById("origin-marker").style.display = 'none';
-                        if(desticoord != null) {
-                          document.getElementById("origin-marker").style.display = 'block';
-                          document.getElementById("destination-marker").style.display = 'block';
-                          calcRoute(origcoord, desticoord);
-                          count = 0;
-                          origcoord = null;
-                          desticoord = null;
-                          marker.setMap(null);
-                        }
-                    }
+                $scope.barrierON = function () {
+                    marker.setMap(null);     
+                    if(origin_marker != null)
+                        origin_marker.setMap(null);
+                    if(destination_marker != null)
+                        destination_marker.setMap(null);
+                    barrier_marker = new google.maps.Marker({
+                        position: tapLocation,
+                        map: map,
+                        title: "marker placed"
+                    })     
+                    barrier_marker.setIcon('http://maps.google.com/mapfiles/kml/shapes/caution.png');
+                    barrier_marker.setAnimation(google.maps.Animation.BOUNCE);
 
-                    $scope.destinationON = function () {
-                        desticoord = event.latLng;
-                        document.getElementById("marker-menu").style.display = 'none';
-                        document.getElementById("destination-marker").style.display = 'none';
-                        if(origcoord != null) {
-                          document.getElementById("origin-marker").style.display = 'block';
-                          document.getElementById("destination-marker").style.display = 'block';
-                          calcRoute(origcoord, desticoord);
-                          count = 0;
-                          origcoord = null;
-                          desticoord = null;
-                          marker.setMap(null);
-                        }
-                    }
+                    document.getElementById("barrier-form").style.display = 'block';
+                    document.getElementById("marker-menu").style.display = 'none';
+                    origcoord = null
+                    document.getElementById("origin-marker").style.display = 'block';                                            
+                    desticoord = null;
+                    document.getElementById("destination-marker").style.display = 'block';
+                }
 
-                    $scope.restartON = function () {
-                        document.getElementById("marker-menu").style.display = 'none';
+                $scope.submitBarrier = function () {
+                    var data = 
+                    {
+                      "email": document.getElementById("email_input").value,
+                      "lon": tapLocation.lng(),
+                      "lat": tapLocation.lat(),
+                      "description": document.getElementById("description_input").value 
+                    };
+                    $http.post("https://goonpes.herokuapp.com/marker",data)
+                    .success(function (response) {$scope.names = response.markers;});
+                }
+
+                $scope.originON = function () {
+                    marker.setMap(null);   
+                    origin_marker = new google.maps.Marker({
+                        position: tapLocation,
+                        map: map,
+                        title: "marker placed"
+                    })  
+                    origin_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/A.png');
+                    document.getElementById("barrier-form").style.display = 'none';
+                    origcoord = event.latLng;
+                    document.getElementById("marker-menu").style.display = 'none';
+                    document.getElementById("origin-marker").style.display = 'none';
+                    if(desticoord != null) {
                         document.getElementById("origin-marker").style.display = 'block';
                         document.getElementById("destination-marker").style.display = 'block';
-                        count = 0;
+                        origin_marker.setMap(null);
+                        destination_marker.setMap(null);
+                        calcRoute(origcoord, desticoord);
                         origcoord = null;
                         desticoord = null;
-                        marker.setMap(null);
                     }
                 }
-                ++count;
+
+                $scope.destinationON = function () {
+                    marker.setMap(null);   
+                    destination_marker = new google.maps.Marker({
+                        position: tapLocation,
+                        map: map,
+                        title: "marker placed"
+                    })  
+                    destination_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/B.png');
+                    document.getElementById("barrier-form").style.display = 'none';     
+                    desticoord = event.latLng;
+                    document.getElementById("marker-menu").style.display = 'none';
+                    document.getElementById("destination-marker").style.display = 'none';
+                    if(origcoord != null) {
+                        document.getElementById("origin-marker").style.display = 'block';
+                        document.getElementById("destination-marker").style.display = 'block';
+                        origin_marker.setMap(null);
+                        destination_marker.setMap(null);
+                        calcRoute(origcoord, desticoord);
+                        origcoord = null;
+                        desticoord = null;
+                    }
+                }
+
+                $scope.restartON = function () {
+                    marker.setMap(null);   
+                    if(origin_marker != null)
+                        origin_marker.setMap(null);
+                    if(destination_marker != null)
+                        destination_marker.setMap(null);
+                    document.getElementById("marker-menu").style.display = 'none';
+                    document.getElementById("origin-marker").style.display = 'block';
+                    document.getElementById("destination-marker").style.display = 'block';
+                    document.getElementById("barrier-form").style.display = 'none';
+                    origcoord = null;
+                    desticoord = null;
+                }
             });
         }
 

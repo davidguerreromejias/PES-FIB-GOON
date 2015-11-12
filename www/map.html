@@ -51,6 +51,21 @@
             <h1 class="title" style="text-align: center">Mapa</h1>
           </ion-header-bar>
           <ion-content>
+            <div id="barrier-form" class="list">
+              <div id="description" class="item item-input-inset">
+                <label class="item-input-wrapper">
+                  <input id="description_input" type="text" placeholder="Description">
+                </label>
+              </div>
+              <div id="email" class="item item-input-inset">
+                <label class="item-input-wrapper">
+                  <input id="email_input" type="text" placeholder="Email">
+                </label>
+                <button class="button button-small" ng-click="submitBarrier()">
+                  Submit
+                </button>
+              </div>
+            </div>
             <div id="marker-menu" class="">
               <button id="place-barrier" class="button icon ion-minus-circled button-full button-positive" ng-click="barrierON()"> Warn of an architectural barrier</button>
               <button id="origin-marker" class="button icon ion-location button-full button-positive" ng-click="originON()"> Set this point as the origin of a route</button>
