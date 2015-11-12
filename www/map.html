@@ -38,7 +38,7 @@
           <ion-nav-back-button>
           </ion-nav-back-button>
           <ion-nav-buttons side="left">
-            <button class="button icon ion-navicon" style="background:transparent; border:none; color:white;"  menu-toggle="left"></button>
+            <button class="button icon ion-android-menu" style="background:transparent; border:none; color:white;"  menu-toggle="left"></button>
             <button id = "audio" class="button icon ion-music-note button-dark" ng-click="togglePlay()">
                 Temazo
             </button>
@@ -83,9 +83,9 @@
           <i class="icon ion-home"></i>
           <h1 class="title" style="text-align: center" >Menú</h1>
         </ion-header-bar>
-        <ion-content>
+        <ion-content style="background-color:rgba(66, 133, 244, 0.2);">
           <ion-list>
-            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+            <ion-item menu-close class="item-icon-left">
               <i class="icon ion-alert"></i>Semàfors
             </ion-item>
             <ion-item menu-close class="item-icon-left" ng-click="semafors();">
@@ -94,13 +94,13 @@
             <ion-item menu-close class="item-icon-left" ng-click="changeMode();">
               <i class="icon ion-loop"></i>Canviar Mode
             </ion-item>
-            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+            <ion-item menu-close class="item-icon-left">
               <i class="icon ion-information-circled"></i>Informació
             </ion-item>
-            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+            <ion-item menu-close class="item-icon-left">
               <i class="icon ion-help-circled"></i>About
             </ion-item>
-            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+            <ion-item menu-close class="item-icon-left">
               <i class="icon ion-power"></i>Log Out
             </ion-item>
           </ion-list>
