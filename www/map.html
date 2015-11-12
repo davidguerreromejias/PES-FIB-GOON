@@ -39,8 +39,8 @@
           </ion-nav-back-button>
           <ion-nav-buttons side="left">
             <button class="button icon ion-navicon" style="background:transparent; border:none; color:white;"  menu-toggle="left"></button>
-            <button id = "audio" class="button button-dark" ng-click="togglePlay()">
-                audio
+            <button id = "audio" class="button icon ion-music-note button-dark" ng-click="togglePlay()">
+                Temazo
             </button>
           </ion-nav-buttons>
         </ion-nav-bar>
@@ -79,28 +79,29 @@
       </ion-side-menu-content>
 
       <ion-side-menu side="left" >
-        <ion-header-bar class="bar-stable">
-          <h1 class="title" style="text-align: center" >Menu</h1>
+        <ion-header-bar class="bar item-icon-left bar-positive" style="background-color:rgba(0, 0, 255, 0.8);">
+          <i class="icon ion-home"></i>
+          <h1 class="title" style="text-align: center" >Menú</h1>
         </ion-header-bar>
         <ion-content>
           <ion-list>
-            <ion-item menu-close href="#/event/check-in">
-              Semàfors
+            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+              <i class="icon ion-alert"></i>Semàfors
             </ion-item>
-            <ion-item menu-close ng-click="semafors();">
-              Autobusos
+            <ion-item menu-close class="item-icon-left" ng-click="semafors();">
+              <i class="icon ion-android-bus"></i>Autobusos
             </ion-item>
-            <ion-item menu-close ng-click="changeMode();">
-              Canviar Mode
+            <ion-item menu-close class="item-icon-left" ng-click="changeMode();">
+              <i class="icon ion-loop"></i>Canviar Mode
             </ion-item>
-            <ion-item menu-close href="#/event/check-in">
-              Info
+            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+              <i class="icon ion-information-circled"></i>Informació
             </ion-item>
-            <ion-item menu-close href="#/event/check-in">
-              About
+            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+              <i class="icon ion-help-circled"></i>About
             </ion-item>
-            <ion-item menu-close href="#/event/check-in">
-              Log Out
+            <ion-item menu-close class="item-icon-left" href="#/event/check-in">
+              <i class="icon ion-power"></i>Log Out
             </ion-item>
           </ion-list>
         </ion-content>
