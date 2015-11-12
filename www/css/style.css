@@ -116,7 +116,9 @@ h2 {
 	right:3%;
 	top:3%;
 	z-index:1;
-	background-color:rgba(29, 173, 36,0.4);
+	border: none;
+	color: white;
+	background-color:rgba(0, 0, 255,0.5);
 	/*color:rgb(11, 64, 14);
 	border-color:rgb(11, 64, 14);*/
 }
@@ -187,13 +189,13 @@ a {
 
 #route-panel {
 	padding:15px 10px;
-	background-color: rgba(90, 191, 23,0.4);
+	background-color: rgba(0, 0, 255, 0.5);
 	width: 90%;
 	height: auto;
 	z-index: 0;
 	position: absolute;
-	right: 20px;
-	top: 25%;
+	right: 5%;
+	top: 15%;
 	border-radius:5px;
 	text-align:center;
 }
