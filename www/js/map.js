@@ -110,7 +110,24 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 map: map,
                 title: "soc aqui"
             })   
-            
+            marker.setIcon('http://maps.google.com/mapfiles/kml/pal2/icon10.png');
+
+            var markers;
+            var index;
+            $http.get("https://goonpes.herokuapp.com/marker")
+            .success(function (response) {markers = response.markers;});
+
+            if(markers != null) {
+                for (index = 0; index < markers.length; ++index) {
+                    var savedMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[index].lat, markers[index].lon),
+                        map: map,
+                        title: markers[index].description
+                    })   
+                    savedMarker.setIcon('http://maps.google.com/mapfiles/kml/pal3/icon41.png');
+                }
+            }
+
             initRuta(map);
               
             $scope.map = map;   
@@ -124,7 +141,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
             var origin_marker, 
                 destination_marker,
                 barrier_marker,
-                marker;
+                init_marker;
 
             var origcoord,
                 desticoord;
@@ -138,10 +155,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
 
                 var tapLocation = event.latLng;
 
-                if(marker != null)      
-                    marker.setMap(null); 
+                if(init_marker != null)      
+                    init_marker.setMap(null); 
 
-                marker = new google.maps.Marker({
+                init_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed"
@@ -150,8 +167,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 if(barrier_marker != null)
                     barrier_marker.setMap(null);
 
+                document.getElementById("barrier-form").style.display = 'none';
+
                 $scope.barrierON = function () {
-                    marker.setMap(null);     
+                    init_marker.setMap(null);     
                     if(origin_marker != null)
                         origin_marker.setMap(null);
                     if(destination_marker != null)
@@ -185,14 +204,13 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 }
 
                 $scope.originON = function () {
-                    marker.setMap(null);   
+                    init_marker.setMap(null);   
                     origin_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed"
                     })  
                     origin_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/A.png');
-                    document.getElementById("barrier-form").style.display = 'none';
                     origcoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("origin-marker").style.display = 'none';
@@ -208,14 +226,13 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 }
 
                 $scope.destinationON = function () {
-                    marker.setMap(null);   
+                    init_marker.setMap(null);   
                     destination_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed"
                     })  
                     destination_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/B.png');
-                    document.getElementById("barrier-form").style.display = 'none';     
                     desticoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("destination-marker").style.display = 'none';
@@ -231,7 +248,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 }
 
                 $scope.restartON = function () {
-                    marker.setMap(null);   
+                    init_marker.setMap(null);   
                     if(origin_marker != null)
                         origin_marker.setMap(null);
                     if(destination_marker != null)
@@ -239,7 +256,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("origin-marker").style.display = 'block';
                     document.getElementById("destination-marker").style.display = 'block';
-                    document.getElementById("barrier-form").style.display = 'none';
                     origcoord = null;
                     desticoord = null;
                 }
