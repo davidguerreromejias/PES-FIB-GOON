@@ -21,34 +21,35 @@
     <!-- your app's js -->
     <script src="js/contrLogin.js"></script>
   </head>
-  <body ng-app="starter" ng-controller="CtrlLogin">
- 
-  <ion-pane id="pane">             
-              <div id="central">
-                   <div id ="inputs" class="list">
-                      <label style="border: 1px solid white;" class="item item-input">
-                        <input name="email" id="email" style="color:white;" type="text" placeholder="Email">
-                      </label>
-                      <label style="border: 1px solid white;" class="item item-input">
-                        <input name="password" id="password" style="color:white;" type="password" placeholder="Password">
-                      </label>
-                    <li  id ="disc" class="item item-checkbox" style="color:white;">
-                         Discapacitat visual
-                         <label class="checkbox">
-                           <input type="checkbox" id="check">
-                           <div class="track">
-                             <div class="handle"></div>
-                           </div>
-                         </label>
-                      </li>
-                      </div> 
-                      <button id="buttonlogin" ng-click="login()";>
-                        <b style="color:white">LOGIN</b>
-                      </button>
-              </div>  
-              <div id="buttonCompte"><button style="border:black; background-color: transparent;" ng-click="goToSignUp()";>
-                <a>Crear Compte</a>
-              </button></div>           
+  <body ng-app="starter" ng-controller="CtrlLogin"> 
+    <ion-pane id="pane">             
+      <div id="central">
+        <div id ="inputs" class="list">
+          <label style="border: 1px solid white;" class="item item-input">
+            <input name="email" id="email" style="color:white;" type="text" placeholder="Email">
+          </label>
+          <label style="border: 1px solid white;" class="item item-input">
+            <input name="password" id="password" style="color:white;" type="password" placeholder="Password">
+          </label>
+          <li  id ="disc" class="item item-checkbox" style="color:white;">
+            Discapacitat visual
+            <label class="checkbox">
+              <input type="checkbox" id="check">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+        </div> 
+        <button id="buttonlogin" ng-click="login()";>
+          <b style="color:white">LOGIN</b>
+        </button>
+      </div>  
+      <div id="buttonCompte">
+        <button style="border:black; background-color: transparent;" ng-click="goToSignUp()";>
+          <a>Crear Compte</a>
+        </button>
+      </div>           
     </ion-pane>
   </body>
 </html>

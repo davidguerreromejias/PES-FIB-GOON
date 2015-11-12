@@ -3,10 +3,10 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var contrLogin = angular.module('starter', ['ionic'])
+var contrSignup = angular.module('starter', ['ionic'])
 
 
-contrLogin.run(function($ionicPlatform) {
+contrSignup.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -21,7 +21,7 @@ contrLogin.run(function($ionicPlatform) {
   });
 })
 
-contrLogin.controller('CtrlSignUp', function($scope, $http, $window) {
+contrSignup.controller('CtrlSignUp', function($scope, $http, $window) {
   
   $scope.sign = function() {
 	  var username = $('#username').val();
@@ -37,14 +37,17 @@ contrLogin.controller('CtrlSignUp', function($scope, $http, $window) {
 		"name":username
 	  }
 	  //onerror method 
-	  $http.post("https://goonpes.herokuapp.com/users",data){
+	  $http.post("https://goonpes.herokuapp.com/users",data)
         .success(function (response) {
 			if(response['msg'] == "Success"){
 				//console.log(response);
 				alert("Registre completat amb èxit");
+				$window.location.assign('index.html');
 			}
 		});
-	}
+	  }
+
+	
 
   $scope.goToLogin = function() {
     $window.location.assign('index.html');    
