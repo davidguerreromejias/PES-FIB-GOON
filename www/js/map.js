@@ -109,7 +109,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 position: myLatlng,
                 map: map,
                 title: 'soc aqui',
-                icon: 'www/img/house_marker.png'
+                //icon: 'www/img/house_marker.png'
             })   
             //marker.setIcon('../img/house_marker.png');
 
@@ -126,7 +126,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             position: new google.maps.LatLng(markers[index].lat, markers[index].lon),
                             map: map,
                             title: markers[index].description,
-                            icon: 'www/img/barrier.png'
+                            //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
                     }
@@ -184,7 +184,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
-                        icon: 'www/img/caution.png'
+                        //icon: 'www/img/caution.png'
                     })     
                     //barrier_marker.setIcon('../img/caution.png');
                     barrier_marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -239,7 +239,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
-                        icon: 'www/img/A.png'
+                        //icon: 'www/img/A.png'
                     })  
                     //origin_marker.setIcon('../img/A.png');
                     origcoord = event.latLng;
@@ -262,7 +262,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
-                        icon: 'www/img/B.png'
+                        //icon: 'www/img/B.png'
                     })  
                     //destination_marker.setIcon('../img/B.png');
                     desticoord = event.latLng;
