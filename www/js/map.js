@@ -110,7 +110,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                 map: map,
                 title: "soc aqui",
             })   
-            marker.setIcon('/img/house_marker.png');
+            marker.setIcon('../img/house_marker.png');
 
             var markers;
             var index;
@@ -124,7 +124,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: markers[index].description
                     })   
-                    savedMarker.setIcon('/img/barrier.png');
+                    savedMarker.setIcon('../img/barrier.png');
                 }
             }
 
@@ -180,7 +180,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })     
-                    barrier_marker.setIcon('http://maps.google.com/mapfiles/kml/shapes/caution.png');
+                    barrier_marker.setIcon('../img/caution.png');
                     barrier_marker.setAnimation(google.maps.Animation.BOUNCE);
 
                     document.getElementById("barrier-form").style.display = 'block';
@@ -210,7 +210,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })  
-                    origin_marker.setIcon('/img/A.png');
+                    origin_marker.setIcon('../img/A.png');
                     origcoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("origin-marker").style.display = 'none';
@@ -232,7 +232,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })  
-                    destination_marker.setIcon('/img/B.png');
+                    destination_marker.setIcon('../img/B.png');
                     desticoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("destination-marker").style.display = 'none';
