@@ -158,18 +158,23 @@ a {
 #central {
 	background-color: rgba(0, 0, 0, 0.7);
 	position: relative;
-	width: 70%;
+	width: 75%;
 	height: 50%;
 	top:20%;
-	left: 15%;
+	left: 12.5%;
 	border-radius: 20px;
 }
 
 #buttonsignup {
-	left: 30%;
-	width: 40%;
+	position:absolute;
+	left: 17%;
+	width: 66%;
+	top: 165%;
 	text-align: center;
-	border-radius: 15px;
+	border-radius: 7px;
+	font-size: 110%;
+	background-color: rgba(0, 100, 255, 0.8);
+	border: black;
 }
 
 #buttonlogin {

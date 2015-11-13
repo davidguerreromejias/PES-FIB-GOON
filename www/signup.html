@@ -23,27 +23,23 @@
   </head>
   <body ng-app="starter" ng-controller="CtrlSignUp">
  
-  <ion-pane>
-          <div id="divLogin">
-                           
+  <ion-pane id="pane">     
               <div id="central">
                    <div id ="inputs" class="list">
-                      <label style="border: 1px solid black;" class="item item-input">
-                        <input name ="username" id="username" type="text" placeholder="Username">
+                      <label style="border: 1px solid white;" class="item item-input">
+                        <input name ="username" id="username" style="color:white;" type="text" placeholder="Username">
                       </label>
-                      <label style="border: 1px solid black;" class="item item-input">
-                        <input name ="password" id="password" type="password" placeholder="Password">
+                      <label style="border: 1px solid white;" class="item item-input">
+                        <input name ="password" id="password" style="color:white;" type="password" placeholder="Password">
                       </label>
-					  <label style="border: 1px solid black;" class="item item-input">
-                        <input name ="email" id="email" type="text" placeholder="Email">
+					            <label style="border: 1px solid white;" class="item item-input">
+                        <input name ="email" id="email" style="color:white; background:transparent;" type="text" placeholder="Email">
                       </label>
-                      
-                        <button id="buttonsignup" class="button button-balanced" ng-click="sign()";>
-                          SIGN UP
-                        </button>
+                      <button id="buttonsignup" class="button button-balanced" ng-click="sign()";>
+                        <b>SIGN UP</b>
+                      </button>
                    </div> 
               </div>              
-          </div>
     </ion-pane>
   </body>
 </html>
