@@ -108,9 +108,9 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: "soc aqui"
+                title: "soc aqui",
             })   
-            marker.setIcon('http://maps.google.com/mapfiles/kml/pal2/icon10.png');
+            marker.setIcon('../img/house_marker.png');
 
             var markers;
             var index;
@@ -124,7 +124,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: markers[index].description
                     })   
-                    savedMarker.setIcon('http://maps.google.com/mapfiles/kml/pal3/icon41.png');
+                    savedMarker.setIcon('../img/barrier.png');
                 }
             }
 
@@ -148,21 +148,21 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
 
             //Place a new marker
             google.maps.event.addListener($scope.map, 'click', function(event) {  
-                if(document.getElementById("marker-menu").style.display == 'block')
-                    document.getElementById("marker-menu").style.display = 'none';
-                else
-                    document.getElementById("marker-menu").style.display = 'block';
-
-                var tapLocation = event.latLng;
-
                 if(init_marker != null)      
                     init_marker.setMap(null); 
+                if(document.getElementById("marker-menu").style.display == 'block')
+                    document.getElementById("marker-menu").style.display = 'none';
+                else {
+                    document.getElementById("marker-menu").style.display = 'block';
 
-                init_marker = new google.maps.Marker({
-                        position: tapLocation,
-                        map: map,
-                        title: "marker placed"
-                })  
+                    var tapLocation = event.latLng;
+
+                    init_marker = new google.maps.Marker({
+                            position: tapLocation,
+                            map: map,
+                            title: "marker placed"
+                    })  
+                }
 
                 if(barrier_marker != null)
                     barrier_marker.setMap(null);
@@ -180,7 +180,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })     
-                    barrier_marker.setIcon('http://maps.google.com/mapfiles/kml/shapes/caution.png');
+                    barrier_marker.setIcon('../img/caution.png');
                     barrier_marker.setAnimation(google.maps.Animation.BOUNCE);
 
                     document.getElementById("barrier-form").style.display = 'block';
@@ -200,7 +200,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                       "description": document.getElementById("description_input").value 
                     };
                     $http.post("https://goonpes.herokuapp.com/marker",data)
-                    .success(function (response) {$scope.names = response.markers;});
+                    .success(function (response) {$scope.names = response.markers; console.log(response);});
                 }
 
                 $scope.originON = function () {
@@ -210,7 +210,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })  
-                    origin_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/A.png');
+                    origin_marker.setIcon('../img/A.png');
                     origcoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("origin-marker").style.display = 'none';
@@ -232,7 +232,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                         map: map,
                         title: "marker placed"
                     })  
-                    destination_marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/B.png');
+                    destination_marker.setIcon('../img/B.png');
                     desticoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("destination-marker").style.display = 'none';
