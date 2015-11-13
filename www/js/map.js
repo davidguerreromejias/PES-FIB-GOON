@@ -39,7 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/event/home");
 })
 
-app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSideMenuDelegate, $window) {
+app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPopup, $timeout, $ionicSideMenuDelegate, $window) {
     //console.log("hola");
     $scope.visible = 0;
     var directionsDisplay;
@@ -112,21 +112,24 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
             })   
             marker.setIcon('../img/house_marker.png');
 
-            var markers;
-            var index;
             $http.get("https://goonpes.herokuapp.com/marker")
-            .success(function (response) {markers = response.markers;});
+            .success(function (response) {
 
-            if(markers != null) {
-                for (index = 0; index < markers.length; ++index) {
-                    var savedMarker = new google.maps.Marker({
-                        position: new google.maps.LatLng(markers[index].lat, markers[index].lon),
-                        map: map,
-                        title: markers[index].description
-                    })   
-                    savedMarker.setIcon('../img/barrier.png');
+                var markers;
+                var index;
+                markers = response.markers; 
+
+                if(markers != null) {
+                    for (index = 0; index < markers.length; ++index) {
+                        var savedMarker = new google.maps.Marker({
+                            position: new google.maps.LatLng(markers[index].lat, markers[index].lon),
+                            map: map,
+                            title: markers[index].description
+                        })   
+                        savedMarker.setIcon('../img/barrier.png');
+                    }
                 }
-            }
+            });
 
             initRuta(map);
               
@@ -200,7 +203,31 @@ app.controller('MapController', function($scope, $http, $ionicLoading,$ionicSide
                       "description": document.getElementById("description_input").value 
                     };
                     $http.post("https://goonpes.herokuapp.com/marker",data)
-                    .success(function (response) {$scope.names = response.markers; console.log(response);});
+                    .success(function (response) {
+                      if(response['msg']=="Success") {
+                          // An elaborate, custom popup
+                          var myPopup = $ionicPopup.show({
+                            title: 'Barrier submitted!',
+                            subTitle: 'Do not panic if the barrier does not appear immediately. Wait for the administrator approves the barrier.',
+                            scope: $scope
+                          });
+                          $timeout(function() {
+                             myPopup.close(); //close the popup after 3 seconds for some reason
+                          }, 3000);
+                          document.getElementById("barrier-form").style.display = 'none';
+                      }
+                      else {
+                          var myPopup = $ionicPopup.show({
+                            title: 'Problem while submitting the barrier!',
+                            subTitle: 'Please, check your internet connection.',
+                            scope: $scope
+                          });
+                          $timeout(function() {
+                             myPopup.close(); //close the popup after 3 seconds for some reason
+                          }, 2000);
+                          document.getElementById("barrier-form").style.display = 'none';
+                      }
+                    });
                 }
 
                 $scope.originON = function () {
