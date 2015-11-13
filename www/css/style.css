@@ -163,10 +163,15 @@ a {
 }
 
 #buttonsignup {
-	left: 30%;
-	width: 40%;
+	position:absolute;
+	left: 17%;
+	width: 66%;
+	top: 165%;
 	text-align: center;
-	border-radius: 15px;
+	border-radius: 7px;
+	font-size: 110%;
+	background-color: rgba(0, 100, 255, 0.8);
+	border: black;
 }
 
 #buttonlogin {
