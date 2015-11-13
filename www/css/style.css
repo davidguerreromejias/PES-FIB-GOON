@@ -158,10 +158,10 @@ a {
 #central {
 	background-color: rgba(0, 0, 0, 0.7);
 	position: relative;
-	width: 70%;
+	width: 75%;
 	height: 50%;
 	top:20%;
-	left: 15%;
+	left: 12.5%;
 	border-radius: 20px;
 }
 
