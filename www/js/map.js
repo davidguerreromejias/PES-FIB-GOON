@@ -56,7 +56,14 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
     };
 
     $scope.changeMode = function(){
+		window.localStorage['blind'] = 'yes';
         $window.location.assign('blind.html');  
+    };
+	
+	$scope.logOut = function(){
+		window.localStorage['email'] = '';
+		window.localStorage['blind'] = '';
+        $window.location.assign('index.html');  
     };
 
     $scope.semafors = function(){

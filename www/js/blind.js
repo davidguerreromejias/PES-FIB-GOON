@@ -38,6 +38,7 @@ contrBlind.controller('CtrlBlind', function($scope, $window) {
   });
 
   function change() {
+	window.localStorage['blind'] = 'no';
     $window.location.assign('map.html');
     navigator.vibrate(5000);
   }

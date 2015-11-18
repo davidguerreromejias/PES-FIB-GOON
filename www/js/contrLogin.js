@@ -6,7 +6,7 @@
 var contrLogin = angular.module('starter', ['ionic'])
 
 
-contrLogin.run(function($ionicPlatform) {
+contrLogin.run(function($ionicPlatform, $window) {
   $ionicPlatform.ready(function() {
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -17,6 +17,19 @@ contrLogin.run(function($ionicPlatform) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+	var session = window.localStorage['email'] || '';
+	if(session != '')
+	{
+		var blind = window.localStorage['blind'] || '';
+		if(blind == 'yes')
+		{
+			$window.location.assign('blind.html');
+		}
+		else
+		{
+			$window.location.assign('map.html');
+		}
+	}
 
   });
 })
@@ -33,8 +46,17 @@ contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
 	  $http.get(url)
         .success(function (response) {
 			if(response['msg']=="Success"){
-				if (document.getElementById('check').checked) $window.location.assign('blind.html');
-				else $window.location.assign('map.html');
+				window.localStorage['email'] = email;
+				if (document.getElementById('check').checked)
+				{
+					window.localStorage['blind'] = 'yes';
+					$window.location.assign('blind.html');
+				}
+				else
+				{
+					window.localStorage['blind'] = 'no';
+					$window.location.assign('map.html');
+				}
 			}
 			else{
 				alert("Error en les credencials");
