@@ -88,6 +88,41 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         audioElm.pause();
     }
 
+    function reportBarrier() {
+        alert("TO IMPLEMENT");
+    }
+
+    function bindInfoWindow(marker) {
+        var infoWindow = new google.maps.InfoWindow({});
+        google.maps.event.addListener(marker, 'click', function() {
+            //'<p>' + marker.title + '<p>' +
+            //'<button class="button icon-left ion-sad-outline button-small button-assertive" onclick="reportMarker()">Report</button>');
+            infoWindow.setContent('<div class="list card">' +
+                    '<div class="item item-avatar">' +
+                        '<img src="' + marker.userImg + '">' +
+                        '<h2 style="color:#2FF5F1">' + marker.user + '</h2>' +
+                        '<p>' + marker.date + '</p>' +
+                    '</div>' +
+
+                  '<div class="item item-body">' +
+                    '<img class="full-image" src="' + marker.barrierImg + '">' +
+                    '<p>' +
+                      marker.title +
+                    '</p>' +
+                  '</div>' +
+
+                  '<div class="item tabs tabs-secondary tabs-icon-left">'+
+                    '<a style="color:#FF0000" class="tab-item" href="#" onclick="reportBarrier()">'+
+                      '<i class="icon ion-sad-outline"></i>'+
+                      "Report" +
+                    '</a>' +
+                  '</div>' +
+
+                '</div>');
+            infoWindow.open(marker.get('map'), marker);
+        });
+    }
+
     function onDeviceReady() {
         var a;
         var b;
@@ -133,9 +168,15 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             position: new google.maps.LatLng(markers[index].lat, markers[index].lon),
                             map: map,
                             title: markers[index].description,
+                            //Only for testing
+                            user: 'Stormtrooper',
+                            date: '20 Novembre, 2015',
+                            userImg: '../img/stormtrooper.png',
+                            barrierImg: '../img/obres.jpg' 
                             //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
+                        bindInfoWindow(savedMarker);            
                     }
                 }
             });
