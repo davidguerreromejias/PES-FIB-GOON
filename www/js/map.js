@@ -101,6 +101,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     '<div class="item item-avatar">' +
                         '<img src="' + marker.userImg + '">' +
                         '<h2 style="color:#2FF5F1">' + marker.user + '</h2>' +
+                        '<h2 style="color:#2FF5F1">' + marker.email + '</h2>' +
                         '<p>' + marker.date + '</p>' +
                     '</div>' +
 
@@ -170,6 +171,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             title: markers[index].description,
                             //Only for testing
                             user: 'Stormtrooper',
+                            email: markers[index].email,
                             date: '20 Novembre, 2015',
                             userImg: '../img/stormtrooper.png',
                             barrierImg: '../img/obres.jpg' 
@@ -248,12 +250,12 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 $scope.submitBarrier = function () {
                     var data = 
                     {
-                      "email": document.getElementById("email_input").value,
+                      "email": (window.localStorage['email'] || ''),
                       "lon": tapLocation.lng(),
                       "lat": tapLocation.lat(),
                       "description": document.getElementById("description_input").value 
                     };
-                    $http.post("https://goonpes.herokuapp.com/marker",data)
+                    $http.post("https://goonpes.herokuapp.com/marker", data)
                     .success(function (response) {
                       if(response['msg']=="Success") {
                           // An elaborate, custom popup
