@@ -206,11 +206,13 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             };          
              
             var map = new google.maps.Map(document.getElementById("map"), mapOptions);          
+
+            var houseIcon = '../img/house_marker.png';
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
                 title: 'soc aqui',
-                //icon: 'www/img/house_marker.png'
+                icon: houseIcon
             })   
             //marker.setIcon('../img/house_marker.png');
 
@@ -221,6 +223,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 var index;
                 markers = response.markers; 
 
+                var barrierIcon = '../img/barrier.png';
                 if(markers != null) {
                     for (index = 0; index < markers.length; ++index) {
                         var savedMarker = new google.maps.Marker({
@@ -233,7 +236,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             date: '20 Novembre, 2015',
                             userImg: '../img/stormtrooper.png',
                             barrierImg: '../img/obres.jpg',
-                            id: markers[index].id 
+                            id: markers[index].id,
+                            icon: barrierIcon
                             //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
@@ -285,6 +289,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
 
                 document.getElementById("barrier-form").style.display = 'none';
 
+                var cautionIcon = '../img/caution.png';
                 $scope.barrierON = function () {
                     init_marker.setMap(null);     
                     if(origin_marker != null)
@@ -295,6 +300,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
+                        icon: cautionIcon
                         //icon: 'www/img/caution.png'
                     })     
                     //barrier_marker.setIcon('../img/caution.png');
@@ -344,12 +350,14 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     });
                 }
 
+                var AIcon = '../img/A.png';
                 $scope.originON = function () {
                     init_marker.setMap(null);   
                     origin_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
+                        icon: AIcon
                         //icon: 'www/img/A.png'
                     })  
                     //origin_marker.setIcon('../img/A.png');
@@ -367,12 +375,14 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     }
                 }
 
+                var BIcon = '../img/B.png';
                 $scope.destinationON = function () {
                     init_marker.setMap(null);   
                     destination_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
                         title: "marker placed",
+                        icon: BIcon
                         //icon: 'www/img/B.png'
                     })  
                     //destination_marker.setIcon('../img/B.png');
