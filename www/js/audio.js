@@ -1,87 +1,73 @@
 /*
- * Check for browser support
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
-var supportMsg = document.getElementById('msg');
+ var app = angular.module('starter', ['ionic'])
+app = {
+    // Application Constructor
+    console.log("entraapp");
+    initialize: function() {
+        this.bindEvents();
+    },
+    // Bind Event Listeners
+    //
+    // Bind any events that are required on startup. Common events are:
+    // 'load', 'deviceready', 'offline', and 'online'.
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var fallbackSpeechSynthesis = window.getSpeechSynthesis();
+        var fallbackSpeechSynthesisUtterance = window.getSpeechSynthesisUtterance();
+        console.log("entra1");
 
-if ('speechSynthesis' in window) {
-	supportMsg.innerHTML = 'Your browser <strong>supports</strong> speech synthesis.';
-} else {
-	supportMsg.innerHTML = 'Sorry your browser <strong>does not support</strong> speech synthesis.<br>Try this in <a href="http://www.google.co.uk/intl/en/chrome/browser/canary.html">Chrome Canary</a>.';
-	supportMsg.classList.add('not-supported');
-}
+        $('#translate').on('click', function() {
+        	console.log("entra2");
+            var text = $('#text').val().trim();
+            var lang = $('#lang').val();
+            var fss = new fallbackSpeechSynthesisUtterance("Please enter a valid Text!");
 
+            if (text.length == 0) {
+                fallbackSpeechSynthesis.speak(fss);
+                return;
+            }
 
-// Get the 'speak' button
-var button = document.getElementById('speak');
+            $('#translated').hide();
 
-// Get the text input element.
-var speechMsgInput = document.getElementById('speech-msg');
+            $.get('http://www.corsproxy.com/translate.google.com/translate_a/t?client=t&hl=en&sl=en&tl=' + lang + '&ie=UTF-8&oe=UTF-8&multires=1&otf=2&ssel=0&tsel=0&sc=1&q=' + encodeURI(text), function(data) {
+                data = eval(data);
+                var translateText = data[0][0][0];
+                $('#translated-text').text(translateText);
+                $('#translated').show();
+                fss = new fallbackSpeechSynthesisUtterance(translateText);
+                fss.lang = lang;
+                fallbackSpeechSynthesis.speak(fss);
+            });
+        });
 
-// Get the voice select element.
-var voiceSelect = document.getElementById('voice');
-
-// Get the attribute controls.
-var volumeInput = document.getElementById('volume');
-var rateInput = document.getElementById('rate');
-var pitchInput = document.getElementById('pitch');
-
-
-// Fetch the list of voices and populate the voice options.
-function loadVoices() {
-  // Fetch the available voices.
-	var voices = speechSynthesis.getVoices();
-  
-  // Loop through each of the voices.
-	voices.forEach(function(voice, i) {
-    // Create a new option element.
-		var option = document.createElement('option');
-    
-    // Set the options value and text.
-		option.value = voice.name;
-		option.innerHTML = voice.name;
-		  
-    // Add the option to the voice selector.
-		voiceSelect.appendChild(option);
-	});
-}
-
-// Execute loadVoices.
-loadVoices();
-
-// Chrome loads voices asynchronously.
-window.speechSynthesis.onvoiceschanged = function(e) {
-  loadVoices();
+        var intro = "Welcome to Smart Mouth!!... Your Friend in Foreign Lands!";
+        fallbackSpeechSynthesis.speak(new fallbackSpeechSynthesisUtterance(intro));
+    }
 };
-
-
-// Create a new utterance for the specified text and add it to
-// the queue.
-function speak(text) {
-  // Create a new instance of SpeechSynthesisUtterance.
-	var msg = new SpeechSynthesisUtterance();
-  
-  // Set the text.
-	msg.text = text;
-  
-  // Set the attributes.
-	msg.volume = parseFloat(volumeInput.value);
-	msg.rate = parseFloat(rateInput.value);
-	msg.pitch = parseFloat(pitchInput.value);
-  
-  // If a voice has been selected, find the voice and set the
-  // utterance instance's voice attribute.
-	if (voiceSelect.value) {
-		msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == voiceSelect.value; })[0];
-	}
-  
-  // Queue this utterance.
-	window.speechSynthesis.speak(msg);
-}
-
-
-// Set up an event listener for when the 'speak' button is clicked.
-button.addEventListener('click', function(e) {
-	if (speechMsgInput.value.length > 0) {
-		speak(speechMsgInput.value);
-	}
-});

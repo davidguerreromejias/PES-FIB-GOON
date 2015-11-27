@@ -16,14 +16,20 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="js/ng-cordova.min.js"></script>    
     <script src="cordova.js"></script>
+
+    <script src="lib/angular-touch/angular-touch.js"></script>
+    <script src="lib/angular-touch/angular-touch.min.js"></script>
  
     <!-- your app's js -->
     <script src="js/blind.js"></script>
   </head>
   <body ng-app="starter" ng-controller="CtrlBlind"> 
     <ion-pane>
-      <div id="divBlind" ng-click="touchstart();">  
-      <h2>Interficie de prova per a gent amb discapacitat visual. Mantenir pressionat 3 segons per cambiar de interficie</h2>
+      <div id="divBlind" ng-click="touchstart();" ng-swipe-left="left();" ng-swipe-right="right();">  
+      <h2>Interficie principal per a gent amb discapacitat visual. </br>
+          Mantenir pressionat 3 segons per cambiar de interficie.</br>
+          Lliscar cap a la dreta per escoltar Autobusos.</br>
+          Lliscar cap a l'esquerra per escoltar semàfors.</h2>
       </div>
     </ion-pane>
   </body>

@@ -70,6 +70,30 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         $window.location.assign('semafors.html');  
     };
 
+    $scope.togglePlay = function () {
+        console.log("hola");
+        var msg = new SpeechSynthesisUtterance('Hola a todos!');
+        msg.lang = 'es-ES';
+        window.speechSynthesis.speak(msg);
+
+            /*var cont = 2;
+            
+            If (cont%2 == 0) {
+                if (document.getElementById("audio1")) {
+                    playAudio(audioElm); 
+                }
+                ++cont;
+            }
+            else {
+                if (document.getElementById("audio1")) {
+                    pauseAudio(audioElm); 
+                }
+                ++cont;
+            }*/
+
+    }
+
+
     function placeMarker(location) {
         var marker = new google.maps.Marker({
             position: location, 
@@ -439,8 +463,9 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         var cont = 2;
 
        //  Alternates between play and pause based on the value of the paused property
-        $scope.togglePlay = function() {
-            if (cont%2 == 0) {
+        /*$scope.togglePlay = function() {
+            
+            /*if (cont%2 == 0) {
                 if (document.getElementById("audio1")) {
                     playAudio(audioElm); 
                 }
@@ -451,8 +476,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     pauseAudio(audioElm); 
                 }
                 ++cont;
-            }
-        }
+            }*/
+        //}
 
        
 

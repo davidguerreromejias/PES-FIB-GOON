@@ -3,6 +3,8 @@
 {
   app.startRangingBeacons = function()
   {
+    var entra25 = true;
+    var entra69 = true;
     function onRange(beaconInfo)
     {
       displayBeconInfo(beaconInfo);
@@ -54,7 +56,24 @@
       htm += '</td></tr></table></div>';*/
       if (beacon.distance)
       {
-        htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' 
+        htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
+        var dis = app.formatDistance(beacon.distance);
+
+        if(dis < "5" && dis > "2" && entra25){
+          var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de cinco metros. ');
+          msg.lang = 'es-ES';
+          window.speechSynthesis.speak(msg);
+          entra25 = false;
+          entra69 = true;
+        }
+
+        else if(dis > "6" && dis < "9" && entra69){
+          var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de nueve metros.');
+          msg.lang = 'es-ES';
+          window.speechSynthesis.speak(msg);
+          entra69 = false;
+          entra25 = true;
+        }
       }
       htm += '</label></br>';
       return htm;
