@@ -21,15 +21,13 @@
     <script src="lib/angular-touch/angular-touch.min.js"></script>
  
     <!-- your app's js -->
-    <script src="js/blind.js"></script>
+    <script src="js/blindBus.js"></script>
   </head>
-  <body ng-app="starter" ng-controller="CtrlBlind"> 
+  <body ng-app="starter" ng-controller="CtrlBlindBus"> 
     <ion-pane>
-      <div id="divBlind" ng-click="touchstart();" ng-swipe-left="left();" ng-swipe-right="right();">  
-      <h2>Interficie principal per a gent amb discapacitat visual. </br>
-          Mantenir pressionat 3 segons per cambiar de interficie.</br>
-          Lliscar cap a la dreta per escoltar Autobusos.</br>
-          Lliscar cap a l'esquerra per escoltar semàfors.</h2>
+      <div id="divBlind" ng-click="touchstart();" ng-swipe-left="left();">  
+      <h2>INTERFÍCIE AUTOBUSOS. </br>
+          Lliscar cap a l'esquerra per tornar a l'interfície principal.</h2>
       </div>
     </ion-pane>
   </body>

@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var contrBlind = angular.module('starter', ['ionic'])
+var contrBlind = angular.module('starter', ['ionic', 'ngTouch'])
 
 
 contrBlind.run(function($ionicPlatform) {
@@ -36,6 +36,20 @@ contrBlind.controller('CtrlBlind', function($scope, $window) {
     clearInterval(timerInterval);
     timer = 0;
   });
+
+  $scope.left = function(){
+        var msg = new SpeechSynthesisUtterance('Interficie Semáforos');
+        msg.lang = 'es-ES';
+        window.speechSynthesis.speak(msg);
+        $window.location.assign('blindLights.html');  
+  };
+
+  $scope.right = function(){
+        var msg = new SpeechSynthesisUtterance('Interficie Autobuses');
+        msg.lang = 'es-ES';
+        window.speechSynthesis.speak(msg);
+        $window.location.assign('blindBus.html');  
+  };
 
   function change() {
 	window.localStorage['blind'] = 'no';
