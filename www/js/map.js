@@ -88,16 +88,18 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         audioElm.pause();
     }
 
-    function reportBarrier() {
-        alert("TO IMPLEMENT");
-    }
-
+    var lastinfowindow;
     function bindInfoWindow(marker) {
         var infoWindow = new google.maps.InfoWindow({});
         google.maps.event.addListener(marker, 'click', function() {
-            //'<p>' + marker.title + '<p>' +
-            //'<button class="button icon-left ion-sad-outline button-small button-assertive" onclick="reportMarker()">Report</button>');
-            infoWindow.setContent('<div class="list card">' +
+
+            if(lastinfowindow != null) 
+                lastinfowindow.close();        
+            
+            lastinfowindow = infoWindow;
+
+            infoWindow.setContent(
+                '<div class="list card" ng-app="starter"  ng-controller="MapController">' +
                     '<div class="item item-avatar">' +
                         '<img src="' + marker.userImg + '">' +
                         '<h2 style="color:#2FF5F1">' + marker.user + '</h2>' +
@@ -113,14 +115,46 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                   '</div>' +
 
                   '<div class="item tabs tabs-secondary tabs-icon-left">'+
-                    '<a style="color:#FF0000" class="tab-item" href="#" onclick="reportBarrier()">'+
+                    '<a id="report" style="color:#FF0000" class="tab-item" href="#" type="button">'+
                       '<i class="icon ion-sad-outline"></i>'+
-                      "Report" +
+                      'Report' +
                     '</a>' +
                   '</div>' +
 
-                '</div>');
+                '</div>'
+            );
             infoWindow.open(marker.get('map'), marker);
+            google.maps.event.addDomListener(report, 'click', function(event) {
+                alert(marker.id);
+                var data = 
+                {
+                  "id": marker.id
+                };
+                $http.post("https://goonpes.herokuapp.com/markerdelete", data)
+                .success(function (response) {
+                  if(response['msg']=="Success") {
+                      // An elaborate, custom popup
+                      var myPopup = $ionicPopup.show({
+                        title: 'You have warned about an error with the barrier!',
+                        subTitle: 'Do not panic if the barrier does not disappear immediately. Wait for the administrator approves the warning.',
+                        scope: $scope
+                      });
+                      $timeout(function() {
+                         myPopup.close(); //close the popup after 3 seconds for some reason
+                      }, 3000);
+                  }
+                  else {
+                      var myPopup = $ionicPopup.show({
+                        title: 'Problem while submitting the warning!',
+                        subTitle: 'Please, check your internet connection.',
+                        scope: $scope
+                      });
+                      $timeout(function() {
+                         myPopup.close(); //close the popup after 3 seconds for some reason
+                      }, 2000);
+                  }
+                });
+            });
         });
     }
 
@@ -174,7 +208,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             email: markers[index].email,
                             date: '20 Novembre, 2015',
                             userImg: '../img/stormtrooper.png',
-                            barrierImg: '../img/obres.jpg' 
+                            barrierImg: '../img/obres.jpg',
+                            id: markers[index].id 
                             //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
@@ -203,6 +238,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
 
             //Place a new marker
             google.maps.event.addListener($scope.map, 'click', function(event) {  
+                if(lastinfowindow != null) 
+                    lastinfowindow.close(); 
                 if(init_marker != null)      
                     init_marker.setMap(null); 
                 if(document.getElementById("marker-menu").style.display == 'block')
