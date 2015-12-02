@@ -1,10 +1,21 @@
 // Range beacons screen.
 ;(function(app)
 {
+
+  var entra25 = true;
+  var entra69 = true;
+  var entra252 = true;
+  var entra692 = true;
+  var checked22 = false;
+  var checkedH10 = false;
+  var bus = "no ha funcionat";
+  var bus2 = "no ha funcionat";
+
+
+
   app.startRangingBeacons = function()
   {
-    var entra25 = true;
-    var entra69 = true;
+
     function onRange(beaconInfo)
     {
       displayBeconInfo(beaconInfo);
@@ -32,11 +43,29 @@
       });
     };
 
+    /*function setBusSelected(){
+        if (document.getElementById("H10").checked)   bus = "H10";
+        if (document.getElementById("22").checked)   bus2 = "22";
+    };*/
+
     function createBeaconHTML(beacon)
     {
-      var bus = "no ha funcionat";
-      if(beacon.major == 23825 && beacon.minor == 61543) bus = 33;
-      else if (beacon.major == 34430 && beacon.minor == 32267) bus = 7;
+      if(beacon.major == 23825 && beacon.minor == 61543) {
+        if (document.getElementById("H10").checked)   {
+          bus = "H10";
+          checkedH10 = true;
+        }
+        else checkedH10 = false;
+      }
+      if (beacon.major == 34430 && beacon.minor == 32267) {
+        
+        if (document.getElementById("22").checked)   {
+          bus2 = "22";
+          checked22 = true;
+        }
+        else checked22 = false;
+
+      }
       var colorClasses = app.beaconColorStyle(beacon.color);
       var htm = '<label>'
       /*var htm = '<div class="' + colorClasses + '">'
@@ -57,9 +86,10 @@
       if (beacon.distance)
       {
         htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
+        htm += 'El bus número ' + bus2 + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
         var dis = app.formatDistance(beacon.distance);
 
-        if(dis < "5" && dis > "2" && entra25){
+        if(dis < 5 && dis > 2 && entra25 && checkedH10){
           var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de cinco metros. ');
           msg.lang = 'es-ES';
           window.speechSynthesis.speak(msg);
@@ -67,12 +97,28 @@
           entra69 = true;
         }
 
-        else if(dis > "6" && dis < "9" && entra69){
+        else if(dis > 6 && dis < 9 && entra69 && checkedH10){
           var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de nueve metros.');
           msg.lang = 'es-ES';
           window.speechSynthesis.speak(msg);
           entra69 = false;
           entra25 = true;
+        }
+
+        if(dis < 5 && dis > 2 && entra252 && checked22){
+          var msg = new SpeechSynthesisUtterance('El bus número '+ bus2 + ' está a menos de cinco metros. ');
+          msg.lang = 'es-ES';
+          window.speechSynthesis.speak(msg);
+          entra252 = false;
+          entra692 = true;
+        }
+
+        else if(dis > 6 && dis < 9 && entra692 && checked22){
+          var msg = new SpeechSynthesisUtterance('El bus número '+ bus2 + ' está a menos de nueve metros.');
+          msg.lang = 'es-ES';
+          window.speechSynthesis.speak(msg);
+          entra692 = false;
+          entra252 = true;
         }
       }
       htm += '</label></br>';

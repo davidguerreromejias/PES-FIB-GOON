@@ -42,7 +42,7 @@ var app = (function()
 
 		if (meters > 1)
 		{
-			return meters.toFixed(3) + ' m';
+			return meters;
 		}
 		else
 		{
