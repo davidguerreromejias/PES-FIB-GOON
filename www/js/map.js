@@ -149,7 +149,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             );
             infoWindow.open(marker.get('map'), marker);
             google.maps.event.addDomListener(report, 'click', function(event) {
-                alert(marker.id);
                 var data = 
                 {
                   "id": marker.id
