@@ -362,4 +362,10 @@ h1.titlebus{
     background-color: rgba(0, 0, 255, 0.8) !important;
 }
 
+.infobus{
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 40px;
+}
+
 
