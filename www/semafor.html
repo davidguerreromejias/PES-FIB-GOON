@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+      initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
+    <title>Semàfor</title>
+  </head>
+  <body>
+    <ion-header-bar style="background-color:rgba(0, 0, 255, 0.8);">
+      <h1 class="titlebus">
+          Semàfors</h1>
+    </ion-header-bar>
+    <img src ="img/traffic-light-157459_640.png" style="width: 30%; height: 30%; margin-left: 10%;"></img>
+    <div id="id-screen-home" class="style-screen">
+      <div id="id-screen-home-button-range-beacons"
+        class="style-button style-color-purple">Activa els avisos per semàfors</div>
+      <div id="id-screen-home-button-live-development"
+        class="style-button style-color-ice"
+        style="display:none;">Live Coding</div>
+    </div>
+
+  <div id="id-screen-range-beacons" class="style-screen">
+      <ion-header-bar class="bar-positive">
+      </ion-header-bar>
+      <div class="style-item-list"></div>
+    </div>
+
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <script src="lib/touch.js"></script>
+    <script src="js/beacon.js"></script>
+    <script src="js/semafor.js"></script>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+ 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>    
+    <script src="cordova.js"></script>
+    <script>
+  
+
+    // Setup button handlers.
+    evothings.touch.onTap(
+      $('#id-screen-home-button-range-beacons')[0],
+      app.startRangingBeacons);
+
+    // Hide buttons on Android.
+    var isAndroid =
+      navigator.userAgent.match(/Android/) ||
+      navigator.userAgent.match(/android/);
+    if (isAndroid)
+    {
+          $('#id-screen-home-button-scan-beacons').hide();
+          $('#id-screen-home-button-range-nearables').hide();
+          $('#id-screen-home-button-monitor-nearables').hide();
+          $('#id-screen-home-button-trigger-nearables').hide();
+        }
+    </script>
+
+  </body>
+</html>

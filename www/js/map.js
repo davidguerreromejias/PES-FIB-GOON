@@ -70,6 +70,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         $window.location.assign('autobus.html');  
     };
 
+    $scope.semafor = function(){
+        $window.location.assign('semafor.html');  
+    };
+
     $scope.togglePlay = function () {
         console.log("hola");
         var msg = new SpeechSynthesisUtterance('Hola a todos!');
