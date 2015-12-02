@@ -43,14 +43,11 @@
       });
     };
 
-    /*function setBusSelected(){
-        if (document.getElementById("H10").checked)   bus = "H10";
-        if (document.getElementById("22").checked)   bus2 = "22";
-    };*/
-
     function createBeaconHTML(beacon)
     {
+      var htm = '<label>'
       if(beacon.major == 23825 && beacon.minor == 61543) {
+          htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
         if (document.getElementById("H10").checked)   {
           bus = "H10";
           checkedH10 = true;
@@ -58,7 +55,7 @@
         else checkedH10 = false;
       }
       if (beacon.major == 34430 && beacon.minor == 32267) {
-        
+        htm += 'El bus número ' + bus2 + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
         if (document.getElementById("22").checked)   {
           bus2 = "22";
           checked22 = true;
@@ -67,7 +64,7 @@
 
       }
       var colorClasses = app.beaconColorStyle(beacon.color);
-      var htm = '<label>'
+      
       /*var htm = '<div class="' + colorClasses + '">'
         + '<table><tr><td>Major</td><td>' + beacon.major
         + '</td></tr><tr><td>Minor</td><td>' + beacon.minor
@@ -85,8 +82,6 @@
       htm += '</td></tr></table></div>';*/
       if (beacon.distance)
       {
-        htm += 'El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
-        htm += 'El bus número ' + bus2 + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.' ;
         var dis = app.formatDistance(beacon.distance);
 
         if(dis < 5 && dis > 2 && entra25 && checkedH10){

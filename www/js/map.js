@@ -66,8 +66,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         $window.location.assign('index.html');  
     };
 
-    $scope.semafors = function(){
-        $window.location.assign('semafors.html');  
+    $scope.autobus = function(){
+        $window.location.assign('autobus.html');  
     };
 
     $scope.togglePlay = function () {
