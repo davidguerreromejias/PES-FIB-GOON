@@ -4912,7 +4912,8 @@ a.item-content {
 .item-icon-left {
   padding-left: 54px; }
   .item-icon-left .icon {
-    left: 11px; }
+    left: 11px;
+    top: -5px; }
 
 .item-complex.item-icon-left {
   padding-left: 0; }
