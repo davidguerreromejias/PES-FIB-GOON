@@ -232,10 +232,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 position: myLatlng,
                 map: map,
                 title: 'soc aqui',
-                icon: { 
-                    url: '../img/house_marker.png'
-                    //size: new google.maps.Size(30,30) 
-                } 
+                'icon': 'www/img/house_marker.png'
             })   
             //marker.setIcon('../img/house_marker.png');
 
