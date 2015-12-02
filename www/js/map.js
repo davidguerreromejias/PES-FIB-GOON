@@ -231,8 +231,11 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: 'soc aqui',
-                'icon': 'www/img/house_marker.png'
+                title: 'soc aqui'
+                //icon: { 
+                    //url: '../img/house_marker.png'
+                    //size: new google.maps.Size(30,30) 
+                //} 
             })   
             //marker.setIcon('../img/house_marker.png');
 
@@ -256,8 +259,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             date: '20 Novembre, 2015',
                             userImg: '../img/stormtrooper.png',
                             barrierImg: '../img/obres.jpg',
-                            id: markers[index].id,
-                            icon: barrierIcon
+                            id: markers[index].id
+                            //icon: barrierIcon
                             //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
@@ -314,8 +317,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     barrier_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed",
-                        icon: cautionIcon
+                        title: "marker placed"
+                        //icon: cautionIcon
                         //icon: 'www/img/caution.png'
                     })     
                     //barrier_marker.setIcon('../img/caution.png');
@@ -371,8 +374,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     origin_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed",
-                        icon: AIcon
+                        title: "marker placed"
+                        //icon: AIcon
                         //icon: 'www/img/A.png'
                     })  
                     //origin_marker.setIcon('../img/A.png');
@@ -396,8 +399,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     destination_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed",
-                        icon: BIcon
+                        title: "marker placed"
+                        //icon: BIcon
                         //icon: 'www/img/B.png'
                     })  
                     //destination_marker.setIcon('../img/B.png');
