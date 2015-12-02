@@ -118,7 +118,23 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         google.maps.event.addListener(marker, 'click', function() {
 
             if(lastinfowindow != null) 
-                lastinfowindow.close();        
+                lastinfowindow.close();     
+            if(document.getElementById("marker-menu").style.display == 'block') {
+                document.getElementById("marker-menu").style.display = 'none';
+                init_marker.setMap(null);
+            }
+            if(document.getElementById("barrier-form").style.display == 'block') {
+                document.getElementById("barrier-form").style.display = 'none';     
+                barrier_marker.setMap(null);    
+            }
+            if(origin_marker != null) {
+                origin_marker.setMap(null);
+                document.getElementById("origin-marker").style.display = 'block';
+            }
+            if(destination_marker != null) {
+                destination_marker.setMap(null);
+                document.getElementById("destination-marker").style.display = 'block';
+            }
             
             lastinfowindow = infoWindow;
 
@@ -180,6 +196,11 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             });
         });
     }
+
+    var origin_marker, 
+        destination_marker,
+        barrier_marker,
+        init_marker;
 
     function onDeviceReady() {
         var a;
@@ -254,11 +275,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
         		    originCoord = myLatlng;
                 document.getElementById("pac-input-origin").value = "My position";
         		};
-
-            var origin_marker, 
-                destination_marker,
-                barrier_marker,
-                init_marker;
 
             var origcoord,
                 desticoord;
