@@ -6088,8 +6088,8 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="rad
   border-color: #11c1f3;
   background-color: #11c1f3; }
 .toggle.toggle-assertive input:checked + .track {
-  border-color: #ef473a;
-  background-color: #ef473a; }
+  border-color: #08357D;
+  background-color: #0c63ee; }
 .toggle.toggle-balanced input:checked + .track {
   border-color: #33cd5f;
   background-color: #33cd5f; }
