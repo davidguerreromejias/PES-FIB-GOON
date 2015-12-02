@@ -1,3 +1,4 @@
+
 // Range beacons screen.
 ;(function(app)
 {

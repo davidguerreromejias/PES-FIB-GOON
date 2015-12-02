@@ -2537,7 +2537,8 @@ table {
 html {
   overflow: hidden;
   -ms-touch-action: pan-y;
-  touch-action: pan-y; }
+  touch-action: pan-y; 
+  background-color: #BCBCCA;}
 
 body, .ionic-body {
   -webkit-touch-callout: none;
