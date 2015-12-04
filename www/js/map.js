@@ -250,7 +250,18 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 var index;
                 markers = response.markers; 
 
-                var barrierIcon = '../img/barrier.png';
+                var barrierIcon = '/icon/barrier.png';
+
+                var image = {
+                    url: 'js/icon/barrier.png',
+                    // This marker is 20 pixels wide by 32 pixels high.
+                    size: new google.maps.Size(50, 50),
+                    // The origin for this image is (0, 0).
+                    origin: new google.maps.Point(0, 0),
+                    // The anchor for this image is the base of the flagpole at (0, 32).
+                    anchor: new google.maps.Point(0, 32)
+                };
+
                 if(markers != null) {
                     for (index = 0; index < markers.length; ++index) {
                         var savedMarker = new google.maps.Marker({
@@ -263,8 +274,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             date: '20 Novembre, 2015',
                             userImg: '../img/stormtrooper.png',
                             barrierImg: '../img/obres.jpg',
-                            id: markers[index].id
-                            //icon: barrierIcon
+                            id: markers[index].id,
+                            icon: image
                             //icon: 'www/img/barrier.png'
                         })   
                         //savedMarker.setIcon('../img/barrier.png');
