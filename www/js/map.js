@@ -230,27 +230,13 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             };          
              
             var map = new google.maps.Map(document.getElementById("map"), mapOptions);          
-
-            var houseIcon = '../img/house_marker.png';
-
-            var pinIcon = new google.maps.MarkerImage(
-                "js/icon/house_marker.png",
-                null, /* size is determined at runtime */
-                null, /* origin is 0,0 */
-                null, /* anchor is bottom center of the scaled image */
-                new google.maps.Size(50, 50)
-            );  
+ 
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: 'soc aqui'
-                //icon: { 
-                    //url: '../img/house_marker.png'
-                    //size: new google.maps.Size(30,30) 
-                //} 
+                title: 'soc aqui',
+                icon: 'js/icon/house_marker.png'
             })   
-            //marker.setIcon('../img/house_marker.png');
-            marker.setIcon(pinIcon);
 
             $http.get("https://goonpes.herokuapp.com/marker")
             .success(function (response) {
@@ -258,18 +244,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 var markers;
                 var index;
                 markers = response.markers; 
-
-                var barrierIcon = '/icon/barrier.png';
-
-                var image = {
-                    url: 'js/icon/barrier.png',
-                    // This marker is 20 pixels wide by 32 pixels high.
-                    size: new google.maps.Size(50, 50),
-                    // The origin for this image is (0, 0).
-                    origin: new google.maps.Point(0, 0),
-                    // The anchor for this image is the base of the flagpole at (0, 32).
-                    anchor: new google.maps.Point(0, 32)
-                };
 
                 if(markers != null) {
                     for (index = 0; index < markers.length; ++index) {
@@ -284,10 +258,9 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             userImg: '../img/stormtrooper.png',
                             barrierImg: '../img/obres.jpg',
                             id: markers[index].id,
-                            icon: image
-                            //icon: 'www/img/barrier.png'
+                            icon: 'js/icon/barrier.png'
                         })   
-                        //savedMarker.setIcon('../img/barrier.png');
+
                         bindInfoWindow(savedMarker);            
                     }
                 }
@@ -298,10 +271,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             $scope.map = map;   
             $ionicLoading.hide();
 		
-        		$scope.useMyPosition = function() {
-        		    originCoord = myLatlng;
+    		$scope.useMyPosition = function() {
+    		    originCoord = myLatlng;
                 document.getElementById("pac-input-origin").value = "My position";
-        		};
+    		};
 
             var origcoord,
                 desticoord;
@@ -331,7 +304,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
 
                 document.getElementById("barrier-form").style.display = 'none';
 
-                var cautionIcon = '../img/caution.png';
                 $scope.barrierON = function () {
                     init_marker.setMap(null);     
                     if(origin_marker != null)
@@ -341,11 +313,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     barrier_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed"
-                        //icon: cautionIcon
-                        //icon: 'www/img/caution.png'
+                        title: "marker placed",
+                        icon: 'js/icon/caution.png'
                     })     
-                    //barrier_marker.setIcon('../img/caution.png');
+
                     barrier_marker.setAnimation(google.maps.Animation.BOUNCE);
 
                     document.getElementById("barrier-form").style.display = 'block';
@@ -392,17 +363,15 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     });
                 }
 
-                var AIcon = '../img/A.png';
                 $scope.originON = function () {
                     init_marker.setMap(null);   
                     origin_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed"
-                        //icon: AIcon
-                        //icon: 'www/img/A.png'
+                        title: "marker placed",
+                        icon: 'js/icon/A.png'
                     })  
-                    //origin_marker.setIcon('../img/A.png');
+
                     origcoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("origin-marker").style.display = 'none';
@@ -423,11 +392,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                     destination_marker = new google.maps.Marker({
                         position: tapLocation,
                         map: map,
-                        title: "marker placed"
-                        //icon: BIcon
-                        //icon: 'www/img/B.png'
+                        title: "marker placed",
+                        icon: 'js/icon/B.png'
                     })  
-                    //destination_marker.setIcon('../img/B.png');
+
                     desticoord = event.latLng;
                     document.getElementById("marker-menu").style.display = 'none';
                     document.getElementById("destination-marker").style.display = 'none';
