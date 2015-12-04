@@ -116,19 +116,18 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.ionicframework.goon342009"
         },
+        "cordova-plugin-tts": {
+            "PACKAGE_NAME": "com.ionicframework.goon342009"
+        },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.goon342009"
+        },
+        "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.ionicframework.goon342009"
         },
         "org.apache.cordova.media": {
             "PACKAGE_NAME": "com.ionicframework.goon342009"
-        },
-        "cordova-plugin-tts": {
-            "PACKAGE_NAME": "com.ionicframework.goon342009"
         }
     },
-    "dependent_plugins": {
-        "org.apache.cordova.file": {
-            "PACKAGE_NAME": "com.ionicframework.goon342009"
-        }
-    }
+    "dependent_plugins": {}
 }

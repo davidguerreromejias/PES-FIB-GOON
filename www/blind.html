@@ -22,10 +22,14 @@
  
     <!-- your app's js -->
     <script src="js/blind.js"></script>
+
+    <script src="lib/jquery-2.1.1.min.js"></script>
+    <!--<script src="lib/jquery-mobile.js"></script>-->
+
   </head>
   <body ng-app="starter" ng-controller="CtrlBlind"> 
     <ion-pane>
-      <div id="divBlind" ng-click="touchstart();" ng-swipe-left="left();" ng-swipe-right="right();">  
+      <div id="divBlind">  
       <h2>Interficie principal per a gent amb discapacitat visual. </br>
           Mantenir pressionat 3 segons per cambiar de interficie.</br>
           Lliscar cap a la dreta per escoltar Autobusos.</br>
@@ -34,3 +38,5 @@
     </ion-pane>
   </body>
 </html>
+
+<!--ng-swipe-left="left();" ng-swipe-right="right();"-->
