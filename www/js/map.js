@@ -232,6 +232,14 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             var map = new google.maps.Map(document.getElementById("map"), mapOptions);          
 
             var houseIcon = '../img/house_marker.png';
+
+            var pinIcon = new google.maps.MarkerImage(
+                "js/icon/house_marker.png",
+                null, /* size is determined at runtime */
+                null, /* origin is 0,0 */
+                null, /* anchor is bottom center of the scaled image */
+                new google.maps.Size(50, 50)
+            );  
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
@@ -242,6 +250,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 //} 
             })   
             //marker.setIcon('../img/house_marker.png');
+            marker.setIcon(pinIcon);
 
             $http.get("https://goonpes.herokuapp.com/marker")
             .success(function (response) {
