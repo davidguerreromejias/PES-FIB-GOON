@@ -95,8 +95,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 ++cont;
             }*/
 
-    }
-
+    };
 
     function placeMarker(location) {
         var marker = new google.maps.Marker({

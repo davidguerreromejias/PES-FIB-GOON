@@ -8,7 +8,12 @@
  
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
- 
+
+    <!-- DROPDOWN -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
  
@@ -42,6 +47,21 @@
             <button id = "audio" class="button icon ion-music-note button-dark" ng-click="togglePlay()">
                 Temazo
             </button>
+          </ion-nav-buttons>
+          <ion-nav-buttons side="right">
+            
+            <div class="dropdown">
+              <button id="information" class="button icon ion-information-circled" style="background:transparent; border:none; color:white;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="information">
+                <li><img src="js/icon/house_marker.png" alt="House Marker"> Your current position </li>
+                <li><img src="js/icon/barrier.png" alt="New Barrier Marker"> Warning of new barrier </li>
+                <li><img src="js/icon/caution.png" alt="Barrier Marker" height="25" width="25"> Architectural barrier </li>
+                <li><img src="js/icon/A.png" alt="Origin Marker" height="25" width="25"> Origin of the route </li>
+                <li><img src="js/icon/B.png" alt="Destination Marker" height="25" width="25"> Destination of the route </li>
+              </ul>
+            </div>
+
           </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent">
