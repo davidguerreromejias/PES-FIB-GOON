@@ -9,8 +9,15 @@
   var entra692 = true;
   var checked22 = false;
   var checkedH10 = false;
+
+  var rojo = true;
+  var verde  = true;
+  var yellow = true;
+
+
   var bus = "no ha funcionat";
   var bus2 = "no ha funcionat";
+
 
 
 
@@ -55,15 +62,6 @@
         }
         else checkedH10 = false;
       }
-      if (beacon.major == 34430 && beacon.minor == 32267) {
-        htm += '<div class="infobus">El bus número ' + bus2 + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.</div>' ;
-        if (document.getElementById("22").checked)   {
-          bus2 = "22";
-          checked22 = true;
-        }
-        else checked22 = false;
-
-      }
       var colorClasses = app.beaconColorStyle(beacon.color);
       
       /*var htm = '<div class="' + colorClasses + '">'
@@ -85,36 +83,43 @@
       {
         var dis = app.formatDistance(beacon.distance);
 
-        if(dis < 5 && dis > 2 && entra25 && checkedH10){
+        if(dis < 6){
+          if(document.getElementsByClassName("lampGreen").length > 0 && verde) {
+            var msg = new SpeechSynthesisUtterance('Esta verde');
+            msg.lang = 'es-ES';
+            window.speechSynthesis.speak(msg);
+
+            verde = false;
+            rojo = true;
+            yellow = true;
+          }
+
+          else if(document.getElementsByClassName("lampRed").length > 0 && rojo) {
+            var msg = new SpeechSynthesisUtterance('Esta rojo, no pase porfavor');
+            msg.lang = 'es-ES';
+            window.speechSynthesis.speak(msg);
+
+            verde = true;
+            rojo = false;
+            yellow = true;
+          }
+
+          else if(document.getElementsByClassName("lampYellow").length > 0 && yellow) {
+            var msg = new SpeechSynthesisUtterance('Esta ambar. Corran! Corran!');
+            msg.lang = 'es-ES';
+            window.speechSynthesis.speak(msg);
+
+            verde = true;
+            rojo = true;
+            yellow = false;
+          }
+
+
           var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de cinco metros. ');
           msg.lang = 'es-ES';
           window.speechSynthesis.speak(msg);
           entra25 = false;
           entra69 = true;
-        }
-
-        else if(dis > 6 && dis < 9 && entra69 && checkedH10){
-          var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de nueve metros.');
-          msg.lang = 'es-ES';
-          window.speechSynthesis.speak(msg);
-          entra69 = false;
-          entra25 = true;
-        }
-
-        if(dis < 5 && dis > 2 && entra252 && checked22){
-          var msg = new SpeechSynthesisUtterance('El bus número '+ bus2 + ' está a menos de cinco metros. ');
-          msg.lang = 'es-ES';
-          window.speechSynthesis.speak(msg);
-          entra252 = false;
-          entra692 = true;
-        }
-
-        else if(dis > 6 && dis < 9 && entra692 && checked22){
-          var msg = new SpeechSynthesisUtterance('El bus número '+ bus2 + ' está a menos de nueve metros.');
-          msg.lang = 'es-ES';
-          window.speechSynthesis.speak(msg);
-          entra692 = false;
-          entra252 = true;
         }
       }
       htm += '</label></br>';
@@ -140,5 +145,59 @@
     estimote.beacons.stopRangingBeaconsInRegion({});
     app.showHomeScreen();
   };
+
+  var changeState = (function () {
+    var state = 0,
+        lamps = ["Red", "Yellow", "Green"],
+        lampsLength = lamps.length,
+        order = [
+            [5000, "Red"],
+            [5000, "Green"],
+            [3000, "Yellow"]
+        ],
+        orderLength = order.length,
+        lampIndex,
+        orderIndex,
+        sId;
+
+    return function (stop) {
+        if (stop) {
+            clearTimeout(sId);
+            return;
+        }
+
+        var lamp,
+        lampDOM;
+
+        for (lampIndex = 0; lampIndex < lampsLength; lampIndex += 1) {
+            lamp = lamps[lampIndex];
+            lampDOM = document.getElementById(lamp);
+            if (order[state].indexOf(lamp) !== -1) {
+                lampDOM.classList.add("lamp" + lamp);
+            } else {
+                lampDOM.classList.remove("lamp" + lamp);
+            }
+            if(document.getElementsByClassName("lampRed").length > 0) console.log("Lampara Roja");
+        }
+
+        sId = setTimeout(changeState, order[state][0]);
+        state += 1;
+        if (state >= orderLength) {
+            state = 0;
+        }
+    };
+}());
+
+
+
+document.getElementById("trafficLight").addEventListener("click", (function () {
+    var state = false;
+    
+    return function () {
+        //if(document.getElementByClass(lampRed)) console.log("Hola");
+        changeState(state);
+        state = !state;
+    };
+}()), false);
 
 })(app);
