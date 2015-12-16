@@ -25,9 +25,8 @@ contrBlindLights.controller('CtrlBlindLights', function($scope, $window) {
 
   var   startX,
         startY,
-        thresholdRight = 60, //required min distance traveled to be considered swipe
-        allowedTime = 75, // maximum time allowed to travel that distance
-        allowedTimeChange = 2300,
+        thresholdRight = 40, //required min distance traveled to be considered swipe
+        allowedTime = 60, // maximum time allowed to travel that distance
         elapsedTime,
         startTime;
 
