@@ -37,11 +37,14 @@ contrLogin.run(function($ionicPlatform, $window) {
 contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
   
   $scope.login = function() {
-
+	  
 	  var email = $('#email').val();
 	  var passwd = $('#password').val();
 	  //client input filter??
 	  var url = "https://goonpes.herokuapp.com/login?email=" + email + "&password=" + passwd;
+	  //loading screen
+	  $('#loading').css("display","block");
+	  
 	  //http petition
 	  $http.get(url)
         .success(function (response) {
@@ -59,6 +62,7 @@ contrLogin.controller('CtrlLogin', function($scope, $http, $window) {
 				}
 			}
 			else{
+				$('#loading').css("display","none");
 				alert("Error en les credencials");
 			}
       });

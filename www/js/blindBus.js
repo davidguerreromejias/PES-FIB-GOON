@@ -25,9 +25,8 @@ contrBlindBus.controller('CtrlBlindBus', function($scope, $window) {
 
   var   startX,
         startY,
-        thresholdLeft = -60, //required min distance traveled to be considered swipe
-        allowedTime = 75, // maximum time allowed to travel that distance
-        allowedTimeChange = 2300,
+        thresholdLeft = -40, //required min distance traveled to be considered swipe
+        allowedTime = 60, // maximum time allowed to travel that distance
         elapsedTime,
         startTime;
 

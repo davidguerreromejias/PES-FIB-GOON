@@ -321,8 +321,10 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                       "lat": tapLocation.lat(),
                       "description": document.getElementById("description_input").value 
                     };
+					$('#loading').css("display","block");
                     $http.post("https://goonpes.herokuapp.com/marker", data)
                     .success(function (response) {
+						$('#loading').css("display","none");
                       if(response['msg']=="Success") {
                           // An elaborate, custom popup
                           var myPopup = $ionicPopup.show({
@@ -515,12 +517,13 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                 destination:end,
                 travelMode: google.maps.TravelMode.TRANSIT //TRANSIT per transport public, WALKING per ruta a peu
             };
-
+			$('#loading').css("display","block");
             directionsService.route(request, function(result, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(result);
                 }
             });
+			$('#loading').css("display","none");
         }
         navigator.geolocation.getCurrentPosition(onSuccess,onError)
     }                            
