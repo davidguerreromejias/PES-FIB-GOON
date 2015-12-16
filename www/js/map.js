@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app = angular.module('starter', ['ionic'])
+var app = angular.module('starter', ['ionic', 'directives.dropdown'])
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -39,7 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/event/home");
 })
 
-app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPopup, $timeout, $ionicSideMenuDelegate, $window) {
+app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPopup, $timeout, $ionicSideMenuDelegate, $window, $ionicPopover) {
     //console.log("hola");
     $scope.visible = 0;
     var directionsDisplay;
@@ -49,6 +49,16 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
     function initRuta(map) {
         directionsDisplay = new google.maps.DirectionsRenderer();
         directionsDisplay.setMap(map);
+    }
+
+    $ionicPopover.fromTemplateUrl('menu.html', {
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    $scope.showMenu = function($event) {
+        $scope.popover.show($event);
     }
 
     $scope.toggleLeft = function(){
@@ -72,29 +82,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
 
     $scope.semafor = function(){
         $window.location.assign('semafor.html');  
-    };
-
-    $scope.togglePlay = function () {
-        console.log("hola");
-        var msg = new SpeechSynthesisUtterance('Hola a todos!');
-        msg.lang = 'es-ES';
-        window.speechSynthesis.speak(msg);
-
-            /*var cont = 2;
-            
-            If (cont%2 == 0) {
-                if (document.getElementById("audio1")) {
-                    playAudio(audioElm); 
-                }
-                ++cont;
-            }
-            else {
-                if (document.getElementById("audio1")) {
-                    pauseAudio(audioElm); 
-                }
-                ++cont;
-            }*/
-
     };
 
     function placeMarker(location) {
