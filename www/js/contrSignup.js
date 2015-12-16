@@ -37,14 +37,17 @@ contrSignup.controller('CtrlSignUp', function($scope, $http, $window) {
 		"name":username
 	  }
 	  //onerror method 
+	  $('#loading').css("display","block");
 	  $http.post("https://goonpes.herokuapp.com/users",data)
         .success(function (response) {
 			if(response['msg'] == "Success"){
+				$('#loading').css("display","none");
 				//console.log(response);
 				alert("Registre completat amb èxit");
 				$window.location.assign('index.html');
 			}
 		});
+		$('#loading').css("display","none");
 	  }
 
 	
