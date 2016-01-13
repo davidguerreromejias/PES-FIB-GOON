@@ -61,10 +61,6 @@ app.controller('AboutController', function($scope, $http, $ionicLoading, $ionicP
         $window.location.assign('map.html');  
     };
 
-    $scope.informacio = function(){
-        $window.location.assign('informacio.html');  
-    };
-
     $scope.changeMode = function(){
 		window.localStorage['blind'] = 'yes';
         $window.location.assign('blind.html');  

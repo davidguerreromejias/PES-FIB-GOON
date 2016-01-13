@@ -73,10 +73,6 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
     $scope.about = function(){
         $window.location.assign('about.html');  
     };
-
-    $scope.informacio = function(){
-        $window.location.assign('informacio.html');  
-    };
 	
 	$scope.logOut = function(){
 		window.localStorage['email'] = '';
