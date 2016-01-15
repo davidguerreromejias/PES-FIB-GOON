@@ -163,8 +163,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                   if(response['msg']=="Success") {
                       // An elaborate, custom popup
                       var myPopup = $ionicPopup.show({
-                        title: 'You have warned about an error with the barrier!',
-                        subTitle: 'Do not panic if the barrier does not disappear immediately. Wait for the administrator approves the warning.',
+                        title: 'Has advertit una barrera!',
+                        subTitle: 'No s\'espanti si la barrera no apareix immediatament. Espereu que l\'administrador aprovi l\'advertència.',
                         scope: $scope
                       });
                       $timeout(function() {
@@ -173,8 +173,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                   }
                   else {
                       var myPopup = $ionicPopup.show({
-                        title: 'Problem while submitting the warning!',
-                        subTitle: 'Please, check your internet connection.',
+                        title: 'Problema a l\'enviar l\'avís!',
+                        subTitle: 'Si us plau, comprovi la seva connexió a Internet.',
                         scope: $scope
                       });
                       $timeout(function() {
@@ -323,8 +323,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                       if(response['msg']=="Success") {
                           // An elaborate, custom popup
                           var myPopup = $ionicPopup.show({
-                            title: 'Barrier submitted!',
-                            subTitle: 'Do not panic if the barrier does not appear immediately. Wait for the administrator approves the barrier.',
+                            title: 'Has advertit una barrera!',
+                            subTitle: 'No s\'espanti si la barrera no apareix immediatament. Espereu que l\'administrador aprovi l\'advertència.',
                             scope: $scope
                           });
                           $timeout(function() {
@@ -334,8 +334,8 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                       }
                       else {
                           var myPopup = $ionicPopup.show({
-                            title: 'Problem while submitting the barrier!',
-                            subTitle: 'Please, check your internet connection.',
+                            title: 'Problema a l\'enviar l\'avís!',
+                            subTitle: 'Si us plau, comprovi la seva connexió a Internet.',
                             scope: $scope
                           });
                           $timeout(function() {
