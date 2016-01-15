@@ -133,22 +133,17 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
             lastinfowindow = infoWindow;
 
             infoWindow.setContent(
-                '<div class="list card" ng-app="starter"  ng-controller="MapController">' +
-                    '<div class="item item-avatar">' +
-                        '<img src="' + marker.userImg + '">' +
-                        '<h2 style="color:#2FF5F1">' + marker.user + '</h2>' +
-                        '<h2 style="color:#2FF5F1">' + marker.email + '</h2>' +
-                        '<p>' + marker.date + '</p>' +
+                '<div ng-app="starter" ng-controller="MapController">' +
+                    '<div>' +
+                        '<h2 style="color:#2FFFFF">' + marker.email + '</h2>' +
                     '</div>' +
-
-                  '<div class="item item-body">' +
-                    '<img class="full-image" src="' + marker.barrierImg + '">' +
+                  '<div>' +
                     '<p>' +
                       marker.title +
                     '</p>' +
                   '</div>' +
 
-                  '<div class="item tabs tabs-secondary tabs-icon-left">'+
+                  '<div>'+
                     '<a id="report" style="color:#FF0000" class="tab-item" href="#" type="button">'+
                       '<i class="icon ion-sad-outline"></i>'+
                       'Report' +
@@ -242,11 +237,7 @@ app.controller('MapController', function($scope, $http, $ionicLoading, $ionicPop
                             map: map,
                             title: markers[index].description,
                             //Only for testing
-                            user: 'Stormtrooper',
                             email: markers[index].email,
-                            date: '20 Novembre, 2015',
-                            userImg: '../img/stormtrooper.png',
-                            barrierImg: '../img/obres.jpg',
                             id: markers[index].id,
                             icon: 'js/icon/barrier.png'
                         })   
