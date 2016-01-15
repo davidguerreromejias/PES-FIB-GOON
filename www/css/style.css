@@ -404,14 +404,22 @@ h1.titlebus{
     background-color: green;
 }
 
-
-
-#button-bus {
+#button-back {
 	position: absolute;
 	top:1%;
-	width: 18%;
+	width: auto;
 	height: 5.2%;
 	left: 2%;
+	background-color:#000099;
+	color:white;
+	border-radius:10px;
+	display:inline-block;
+}
+
+#button-back img{
+	display:inline-block;
+	width:25px;
+	height:25px;
 }
 
 
