@@ -8,41 +8,33 @@
     <link rel="stylesheet" href="css/app.css" />
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
+ 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-	
-	<script src="js/about.js"></script>
-    
-    <title>Autobús</title>
+
+   
+    <title>AutobÃºs</title>
   </head>
-  <body ng-app="starter" ng-controller="AboutController">
-    <ion-side-menus>
-      <ion-side-menu-content>
-        <ion-nav-bar class="bar-stable">
-          <ion-nav-back-button>
-          </ion-nav-back-button>
-          <ion-nav-buttons side="left">
-            <button class="button icon ion-android-menu" style="background:transparent; border:none; color:white;"  menu-toggle="left"></button>
-          </ion-nav-buttons>
-        </ion-nav-bar>
-        <ion-nav-view name="menuContent">
-          <script id="templates/event-menu.html" type="text/ng-template"></script>  
-          <script id="templates/home.html" type="text/ng-template"></script>
-          <ion-header-bar style="background-color:rgba(0, 0, 255, 0.8);">
-            <h1 class="title" style="text-align: center; color: white;">Autobusos pròxims</h1>
-          </ion-header-bar>
-          <ion-content>
-            
+  <body>
+
+    <button id="button-bus" onclick="goMap()">
+      <b>Mapa</b>
+    </button>
+
+    <ion-header-bar style="background-color:rgba(0, 0, 255, 0.8);">
+      <h1 class="titlebus">
+          Autobusos</h1>
+    </ion-header-bar>
+
     <div id="id-screen-home" class="style-screen">
       <div id="id-screen-home-button-range-beacons"
-        class="style-button style-color-purple">Selecciona el teu bus i clica <b>aquí</b></div>
+        class="style-button style-color-purple" style="text-align: center">Selecciona el teu bus i clica <b>aquí</b></div>
       <div id="id-screen-home-button-live-development"
         class="style-button style-color-ice"
         style="display:none;">Live Coding</div>
     </div>
-
-    
-
+ 
+   
+ 
     <ul class="list">
       <li class="item item-toggle">
          H10
@@ -62,53 +54,26 @@
            </div>
          </label>
       </li>
-
+ 
   </ul>
-
+ 
   <div id="id-screen-range-beacons" class="style-screen">
       <ion-header-bar class="bar-positive">
       </ion-header-bar>
       <div class="style-item-list"></div>
     </div>
-          </ion-content>
-        </ion-nav-view>
-      </ion-side-menu-content>
 
-      <ion-side-menu side="left" >
-        <ion-header-bar class="bar item-icon-left bar-positive" style="background-color:rgba(0, 0, 255, 0.8);">
-          <i class="icon ion-home" style="top:1px;"></i>
-          <h1 class="title" style="text-align: center" >Menú</h1>
-        </ion-header-bar>
-        <ion-content style="background-color:rgba(66, 133, 244, 0.2);">
-          <ion-list>
-            <ion-item menu-close class="item-icon-left" ng-click="mapa()">
-              <i class="icon ion-android-map"></i>Mapa
-            </ion-item>
-            <ion-item menu-close class="item-icon-left" ng-click="semafor();">
-              <i class="icon ion-alert"></i>Semàfors
-            </ion-item>
-            <ion-item menu-close class="item-icon-left" ng-click="autobus();">
-              <i class="icon ion-android-bus"></i>Autobusos
-            </ion-item>
-            <ion-item menu-close class="item-icon-left" ng-click="changeMode();">
-              <i class="icon ion-loop"></i>Canviar Mode
-            </ion-item>
-            <ion-item menu-close class="item-icon-left">
-              <i class="icon ion-help-circled"></i>About
-            </ion-item>
-            <ion-item menu-close class="item-icon-left" ng-click="logOut()";>
-              <i class="icon ion-power"></i>Log Out
-            </ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-side-menu-content>
-    </ion-side-menus>
-
+    <script>
+      function goMap() {
+        document.location.assign('map.html');
+      }
+    </script>
+ 
     <script src="lib/jquery-2.1.1.min.js"></script>
     <script src="lib/touch.js"></script>
     <script src="js/beacon.js"></script>
     <script src="js/autobus.js"></script>
-
+ 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
  
@@ -116,13 +81,13 @@
     <script src="js/ng-cordova.min.js"></script>    
     <script src="cordova.js"></script>
     <script>
-  
-
+ 
+ 
     // Setup button handlers.
     evothings.touch.onTap(
       $('#id-screen-home-button-range-beacons')[0],
       app.startRangingBeacons);
-
+ 
     // Hide buttons on Android.
     var isAndroid =
       navigator.userAgent.match(/Android/) ||
@@ -135,6 +100,6 @@
           $('#id-screen-home-button-trigger-nearables').hide();
         }
     </script>
-
+ 
   </body>
 </html>
