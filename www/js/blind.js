@@ -82,7 +82,7 @@ contrBlind.controller('CtrlBlind', function($scope, $window) {
             var msg = new SpeechSynthesisUtterance('Interficie Autobuses');
             msg.lang = 'es-ES';
             window.speechSynthesis.speak(msg);
-            $window.location.assign('blindBus.html');
+            $window.location.assign('autobusCopy.html');
         }
         if (isrightswipe == "left") {
             var msg = new SpeechSynthesisUtterance('Interficie Semáforos');

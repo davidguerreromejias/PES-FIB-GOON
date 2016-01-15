@@ -8,91 +8,46 @@
     <link rel="stylesheet" href="css/app.css" />
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
- 
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-   
-    <title>Autobus</title>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
+    <title>AutobÃºs</title>
   </head>
   <body>
-
-    <button id="button-bus" onclick="goMap()">
-      <b>Mapa</b>
-    </button>
-
-    <ion-header-bar style="background-color:rgba(0, 0, 255, 0.8);">
-      <h1 class="titlebus">
-          Autobusos</h1>
-    </ion-header-bar>
-
+   <p>Interfície autobusos</p>
     <div id="id-screen-home" class="style-screen">
       <div id="id-screen-home-button-range-beacons"
-        class="style-button style-color-purple" style="text-align: center">Selecciona el teu bus i clica <b>aquí</b></div>
+        class="style-button style-color-purple">Selecciona el teu bus i clica <b>aquÃ­</b></div>
       <div id="id-screen-home-button-live-development"
         class="style-button style-color-ice"
         style="display:none;">Live Coding</div>
     </div>
- 
-   
- 
-    <ul class="list">
-      <li class="item item-toggle">
-         H10
-         <label class="toggle toggle-assertive">
-           <input type="checkbox" id ="H10">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
-      </li>
-      <li class="item item-toggle">
-         22
-         <label class="toggle toggle-assertive">
-           <input type="checkbox" id="22">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
-      </li>
- 
-  </ul>
- 
+
+
   <div id="id-screen-range-beacons" class="style-screen">
       <ion-header-bar class="bar-positive">
       </ion-header-bar>
       <div class="style-item-list"></div>
     </div>
 
-    <script>
-      function goMap() {
-        document.location.assign('map.html');
-      }
-    </script>
- 
     <script src="lib/jquery-2.1.1.min.js"></script>
     <script src="lib/touch.js"></script>
     <script src="js/beacon.js"></script>
     <script src="js/autobus.js"></script>
-<<<<<<< HEAD
- 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
- 
-=======
 
-
->>>>>>> 6c85a9287c32d2bd2577eb457e1ce2f2e16cc8d4
+  
+ 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="js/ng-cordova.min.js"></script>    
     <script src="cordova.js"></script>
     <script>
- 
- 
+  
+
     // Setup button handlers.
     evothings.touch.onTap(
       $('#id-screen-home-button-range-beacons')[0],
       app.startRangingBeacons);
- 
+
     // Hide buttons on Android.
     var isAndroid =
       navigator.userAgent.match(/Android/) ||
@@ -105,6 +60,6 @@
           $('#id-screen-home-button-trigger-nearables').hide();
         }
     </script>
- 
+
   </body>
 </html>
