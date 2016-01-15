@@ -15,10 +15,6 @@
   var yellow = true;
 
 
-  var bus = "no ha funcionat";
-  var bus2 = "no ha funcionat";
-
-
 
 
   app.startRangingBeacons = function()
@@ -53,15 +49,8 @@
 
     function createBeaconHTML(beacon)
     {
-      var htm = '<label>'
-      if(beacon.major == 23825 && beacon.minor == 61543) {
-          htm += '<div class="infobus">El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.</div>' ;
-        if (document.getElementById("H10").checked)   {
-          bus = "H10";
-          checkedH10 = true;
-        }
-        else checkedH10 = false;
-      }
+      var htm = '<label>';
+      
       var colorClasses = app.beaconColorStyle(beacon.color);
       
       /*var htm = '<div class="' + colorClasses + '">'
@@ -114,10 +103,6 @@
             yellow = false;
           }
 
-
-          var msg = new SpeechSynthesisUtterance('El bus número '+ bus + ' está a menos de cinco metros. ');
-          msg.lang = 'es-ES';
-          window.speechSynthesis.speak(msg);
           entra25 = false;
           entra69 = true;
         }
