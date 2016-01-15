@@ -59,15 +59,15 @@
               </div>
               <div id="email" class="item item-input-inset">
                 <button class="button button-small" ng-click="submitBarrier()">
-                  Submit
+                  Enviar
                 </button>
               </div>
             </div>
             <div id="marker-menu" class="">
-              <button id="place-barrier" class="button icon ion-minus-circled button-full button-positive" ng-click="barrierON()"> Warn of an architectural barrier</button>
-              <button id="origin-marker" class="button icon ion-location button-full button-positive" ng-click="originON()"> Set this point as the origin of a route</button>
-              <button id="destination-marker" class="button icon ion-location button-full button-positive" ng-click="destinationON()"> Set this point as the destination of a route</button>
-              <button id="restart-menu" class="button icon ion-refresh button-full button-positive" ng-click="restartON()"> Restart origin and destination </button>   
+              <button id="place-barrier" class="button icon ion-minus-circled button-full button-positive" ng-click="barrierON()"> Avís de barrera arquitectònica</button>
+              <button id="origin-marker" class="button icon ion-location button-full button-positive" ng-click="originON()"> Indicar com a punt d'origen</button>
+              <button id="destination-marker" class="button icon ion-location button-full button-positive" ng-click="destinationON()"> Indicar com a punt de destinació</button>
+              <button id="restart-menu" class="button icon ion-refresh button-full button-positive" ng-click="restartON()"> Reestablir origen i destí </button>   
             </div>
             <button id="appearSearchBox" class="button icon ion-map  button-positive" ng-click="askRouteTap()"></button>
             <div id="map" data-tap-disabled="true"></div>
@@ -76,11 +76,11 @@
 			  <button id="use-my-position" class="button icon ion-ios-location  button-positive" ng-click="useMyPosition()"></button>
               <label class="item item-input" style="background-color: #fff;">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input id="pac-input-origin" class="controls" type="text" placeholder="Origin" autocomplete="off" ng-focus="disableOriginTap()">
+                <input id="pac-input-origin" class="controls" type="text" placeholder="Origen" autocomplete="off" ng-focus="disableOriginTap()">
               </label>
               <label class="item item-input" style="background-color: #fff;">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input id="pac-input-destination" class="controls" type="text" placeholder="Destination" autocomplete="off"  ng-focus="disableDestinationTap()"/>
+                <input id="pac-input-destination" class="controls" type="text" placeholder="Destinació" autocomplete="off"  ng-focus="disableDestinationTap()"/>
               </label>
               <button id="create_route" class="button icon-right ion-ios-navigate button-dark" ng-click="getRouteTap()">Go!</button>
               
