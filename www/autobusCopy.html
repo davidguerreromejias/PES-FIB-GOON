@@ -9,15 +9,28 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+ 
+    <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+ 
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="js/ng-cordova.min.js"></script>    
+    <script src="cordova.js"></script>
+
+    <script src="lib/angular-touch/angular-touch.js"></script>
+    <script src="lib/angular-touch/angular-touch.min.js"></script>
     
-    <title>AutobÃºs</title>
+    <title>Autobusos</title>
   </head>
   <body>
-   <p>Interfície autobusos</p>
-    <div id="id-screen-home" class="style-screen">
-      <div id="id-screen-home-button-range-beacons"
-        class="style-button style-color-purple">Selecciona el teu bus i clica <b>aquÃ­</b></div>
+    
+    <div id="id-screen-home" class="style-screen" >
+      <div id="id-screen-home-button-range-beacons" 
+        class="style-button style-color-purple">Clica per activar busqueda de beacons</div>
       <div id="id-screen-home-button-live-development"
         class="style-button style-color-ice"
         style="display:none;">Live Coding</div>
@@ -33,7 +46,7 @@
     <script src="lib/jquery-2.1.1.min.js"></script>
     <script src="lib/touch.js"></script>
     <script src="js/beacon.js"></script>
-    <script src="js/autobus.js"></script>
+    <script src="js/autobusCopy.js"></script>
 
   
  
@@ -61,5 +74,88 @@
         }
     </script>
 
+        <div ng-app="starter" ng-controller="CtrlBlindBus"> 
+     
+
+        <div id="divBlind" ng-click="touchstart();" ng-swipe-left="left();">  
+        <h2>INTERFÍCIE AUTOBUSOS. </br>
+            Lliscar cap a l'esquerra per tornar a l'interfície principal.</h2>
+    </div>
+
   </body>
+
+  <script>
+  // Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+var contrBlindBus = angular.module('starter', ['ionic', 'ngTouch'])
+
+
+contrBlindBus.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+
+  });
+})
+
+contrBlindBus.controller('CtrlBlindBus', function($scope, $window) {
+
+  var   startX,
+        startY,
+        thresholdLeft = -40, //required min distance traveled to be considered swipe
+        allowedTime = 60, // maximum time allowed to travel that distance
+        elapsedTime,
+        startTime;
+
+  var div = document.getElementById("divBlind");
+
+  function handleswipe(isleftswipe){
+      if(isleftswipe) {
+        var msg = new SpeechSynthesisUtterance('Interficie Principal');
+        msg.lang = 'es-ES';  
+        window.speechSynthesis.speak(msg);          
+        $window.location.assign('blind.html');
+      }
+  }
+
+  div.addEventListener("touchstart", function(e){
+        console.log("touchstart");
+        var touchobj = e.changedTouches[0]
+        dist = 0
+        startX = touchobj.pageX
+        startY = touchobj.pageY
+        startTime = new Date().getTime() // record time when finger first makes contact with surface
+        e.preventDefault()
+    }, false)
+
+    div.addEventListener("touchmove", function(e){
+      console.log("touchmove");
+        e.preventDefault() // prevent scrolling when inside DIV
+    }, false)
+ 
+    div.addEventListener("touchend", function(e){
+        console.log("touchend");
+        var touchobj = e.changedTouches[0]
+        dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
+        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        // check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+        var swiperightBol;
+        swiperightBol = (elapsedTime >= allowedTime && dist <= thresholdLeft && Math.abs(touchobj.pageY - startY) <= 100)  
+
+        handleswipe(swiperightBol)
+        e.preventDefault()
+    }, false)
+
+});
+  </script>
 </html>

@@ -14,7 +14,6 @@
 
   app.startRangingBeacons = function()
   {
-
     function onRange(beaconInfo)
     {
       displayBeconInfo(beaconInfo);
@@ -46,9 +45,11 @@
     {
       var htm = '<label>'
       if(beacon.major == 23825 && beacon.minor == 61543) {
-          htm += '<div class="infobus">El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.</div>' ;
+        bus = "H10";
+        htm += '<div class="infobus">El bus número ' + bus + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.</div>' ;   
       }
       if (beacon.major == 34430 && beacon.minor == 32267) {
+        bus = "22";
         htm += '<div class="infobus">El bus número ' + bus2 + ' està a ' + app.formatDistance(beacon.distance) + ' de distancia.</div>' ;
       }
       var colorClasses = app.beaconColorStyle(beacon.color);
